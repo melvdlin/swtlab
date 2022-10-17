@@ -1,0 +1,431 @@
+\documentclass[a4paper,10pt,titlepage,bibtotoc,bibtotocnumbered]{scrreprt}
+
+\usepackage[utf8]{inputenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{lscape}
+\usepackage{rotating}
+\usepackage{ulem}
+
+
+%%%%%%%Here you have to choose german or english texts in your submissions
+%German submission
+%\usepackage[ngerman]{babel}
+%English submission
+\usepackage[english]{babel}
+
+%Graphics and pictures
+\usepackage[caption=false]{subfig}
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{placeins}
+
+%Enumerations
+\usepackage{enumerate}
+\usepackage{mdwlist}
+
+%Math symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%Coloring of tables
+\usepackage{longtable}
+\usepackage{xcolor, colortbl}
+
+%Code representation
+\usepackage{listings}
+
+%Diagrams with tikZ
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, positioning}
+
+\newcommand{\students}[1]{\def\vstudents{#1}}
+\newcommand{\labtime}[1]{\def\vlabtime{#1}}
+\newcommand{\supervisor}[2]{\def\vsupervisor{\href{#2}{#1}}}
+
+
+\usepackage[marginpar=2cm,
+	reversemp,
+	includehead,
+	includefoot,
+	bindingoffset=0cm,
+	textheight=23cm,
+	hdivide={3.5cm,*,3.5cm},
+	vdivide={*,23cm,*}
+	]{geometry}
+
+
+\usepackage[pdftex,	pdfauthor={},
+				pdftitle={Online Banking Application},
+				pdfsubject={Lab for Software Engineering WS15/16}, 
+				breaklinks=true, 
+				colorlinks=true, 
+				linkcolor=black,
+				urlcolor=blue,%blue
+				citecolor=red,%red
+	        		pdfpagemode=None,
+%   			    	pdffitwindow=true,
+        			a4paper=true,
+				plainpages=false,
+				pdfpagelabels,     
+				pageanchor=false,
+				pdfstartpage=1,
+           ]{hyperref}
+
+
+\begin{document} 
+
+
+%-------------------- Declaration part --------------------------------------------
+%-------------------- Here you have to add all group members, your lab date -------
+%-------------------- and the name of your supervisor -----------------------------
+\students{Student 1 (1234567)\\Student 2 (1234567)\\Student 3 (1234567)\\Student 4 (1234567)\\Student 5 (1234567)}
+\labtime{Mo. 10-12}
+\supervisor{Roman Wirtz}{roman.wirtz@stud.uni-due.de}
+%----------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------
+
+
+
+\pagenumbering{roman}
+
+\begin{titlepage}
+\centering
+\enlargethispage*{40mm}
+
+\vspace*{-10mm}
+
+\begin{minipage}[c]{0.25\textwidth}
+\hspace*{-22mm}
+\includegraphics[height=45pt]{figures/logo_uni}\linebreak
+\end{minipage}
+\begin{minipage}[r]{0.74\textwidth}
+\vspace*{1mm}
+\begin{flushright}
+\Large{Lab for Software Engineering}\linebreak
+\large{Winter term 2015/2016}\linebreak
+\end{flushright}
+\end{minipage}
+\hspace*{-18mm}
+
+\textcolor{blue}{\rule{154mm}{0.2mm}}
+
+
+\vspace*{55mm}\vfill
+
+\textit{Lab for Software Engineering}\vspace*{4mm}
+
+\Huge{Online Banking Application}\vspace*{7mm}
+
+\Large{\vstudents}\vspace*{9mm}
+
+
+\normalsize{\today}
+
+
+
+\vspace*{80mm}
+
+\textcolor{blue}{\rule{\textwidth}{0.2mm}}
+\begin{flushleft}
+\sf University of Duisburg-Essen $\cdot$ Faculty of Engineering
+\large{Working group \href{http://swe.uni-due.de}{Software Engineering} -- Prof. Dr. M. Heisel}\\
+
+\small{Date: \vlabtime- Supervisor: \vsupervisor}
+\end{flushleft}
+
+\end{titlepage}
+
+
+\tableofcontents
+\listoffigures
+
+%------------
+%------------The structure is the same as used in the lecture.
+%------------You can specify new sections included in each chapter and you can also add new subsections.
+%------------
+%------------
+\chapter{Analysis}
+\section{A1}
+
+%---------------
+%---------------The style of enumerations is already given (e.g. R1, R2,...)
+%---------------Just add \item before each element
+%---------------
+%---------------
+\subsection{Requirements \& Domain-Knowledge}
+
+\subsubsection{Requirements}
+\begin{enumerate}[R1]
+	\item First...
+	\item Second...
+\end{enumerate}
+
+\subsubsection{Facts}
+\begin{enumerate}[F1]
+	\item First...
+	\item Second...
+\end{enumerate}
+
+\subsubsection{Assumptions}
+\begin{enumerate}[{A}1]
+	\item First...
+	\item Second...
+\end{enumerate}
+
+%---------------
+%---------------You can use the following code snippet to inclue pictures into your document.
+%---------------\caption command places a little description under the picture.
+%---------------\label is used to reference the picture in the text with command \ref{figure:contextDiagram}.
+%---------------
+\subsection{Contextdiagram}
+\begin{figure}[H]
+	\centering
+  	\includegraphics[width=0.9\textwidth]{figures/A1/contextDiagram}
+	\caption{Contextdiagram}
+	\label{figure:contextDiagram}
+\end{figure}
+
+
+\newpage\section{A2}
+We can derive the following problem diagrams
+
+\begin{figure}[H]
+	\centering
+  	\includegraphics[width=0.9\textwidth]{figures/A2/pdR1.pdf}
+	\caption{Problemdiagram for R1}
+	\label{figure:pdR1}
+\end{figure}
+
+\newpage\section{A3}
+
+\newpage\section{A4}
+
+\newpage\section{A5}
+A short OCL example:\\
+%-------------------
+%-------------------The following used package provides an easy OCL syntax highlighting.
+%-------------------You do not have to add linebreaks. It is done automatically.
+%-------------------
+\lstset{language=OCL}          % Set your language (you can change the language for each code-block optionally)
+
+\begin{lstlisting}[frame=single,breaklines=true,numbers=left,numberfirstline=true]
+context Person inv: self.alter >=0
+
+pre alter>30
+post alter=alter@pre+1
+
+\end{lstlisting}
+
+\newpage\section{A6}
+
+Examples of a life-cycle using the math-environment:
+
+$LC_{guest}=(Browse^+;[Book])^*$
+
+
+
+\chapter{Design}
+
+\section{D1}
+
+\section{D2}
+
+\section{D3}
+
+\section{D4}
+
+State diagrams with tikZ:
+%Do not change, only declaration of the element
+\tikzstyle{startpoint} = [circle, minimum width=0.5cm, minimum height=0.5cm, text centered, draw=black, fill=black]
+\tikzstyle{endpoint} = [circle, minimum width=0.5cm, minimum height=0.5cm, text centered, draw=black, fill=white]
+\tikzstyle{endin} = [circle, minimum width=0.05cm, minimum height=0.05cm, text centered, draw=black, fill=black]
+\tikzstyle{state} = [rectangle, rounded corners, minimum width=2cm, minimum height=1cm, text centered, draw=black]
+\tikzstyle{decision} = [diamond, minimum width=0.5cm, minimum height=0.5cm, text centered, draw=black]
+\tikzstyle{arrow} = [->,>=stealth]
+\tikzstyle{every node} = [font=\tiny]
+
+%--------------
+%--------------We use the same figure environment as for pictures to reference diagrams with tikz.
+%--------------Here we provide a small example how to draw a state machine with tikZ.
+%--------------The picture is created only with this commands.
+%--------------
+\begin{figure}[H]
+\caption{Zustandsdiagramm Person 1}
+\label{d1:zustand1}
+\begin{tikzpicture}[node distance=2cm]
+
+%Knoten
+\node (Start) [startpoint]{};
+\node (State1) [state, right= of Start] {State 1};
+\draw [arrow] (Start) -- (State1);
+
+\node (Decision1) [decision, right= of State1]{};
+\draw [arrow] (State1) -- (Decision1)  node [pos=0.5,below,fill=white] {Annotation};
+
+\node (State2) [state, below= of Decision1] {State 2};
+\draw [arrow] (Decision1) -- (State2)  node [pos=0.2,below,fill=white] {true};
+
+
+
+\node (End) [endpoint,right= of State2]{\begin{tikzpicture}\node (End) [endin]{};\end{tikzpicture}};
+\draw [arrow] (State2) -- (End);
+\draw [arrow] (Decision1) -| (End)  node [pos=0.2,left,fill=white] {false};
+\end{tikzpicture}
+\end{figure}
+
+
+
+\chapter{Implementation \& Testing}
+
+%---------------
+%---------------You do not have to copy your source code.
+%---------------Just use the given space to add any comments or explanations.
+%---------------
+
+\section{I}
+
+\section{T1}
+
+\section{T2}
+
+\section{T3}
+
+
+
+
+%-------------------------
+%-------------------------
+%--------The glossary makes use of the package longtable to allow automatic page breaks
+%-------------------------
+%-------------------------
+\chapter{Glossary}
+
+\begin{longtable}{|l|l|p{5cm}|l|}
+\caption{Glossary} 
+\label{table:glossar}\\ 
+\hline
+\rowcolor{black!25}\textbf{Name} & \textbf{Type} & \textbf{Description} & \textbf{Source}\\
+\hline
+\endfirsthead
+\caption[]{Glossar}\\ 
+\hline
+\rowcolor{black!25}\textbf{Name} & \textbf{Type} & \textbf{Description} & \textbf{Source}\\
+\endhead
+\hline
+\endfoot
+\multicolumn{4}{|l|}{\textbf{A}}\\
+\hline
+%-------------------------
+%-------------------------
+%--------Each element of the table is expressed in the following way:
+%--------Cells are divided by & and each row ends with \\ (linebreak).
+%--------The line between two rows is added with \hline.
+%-------------------------
+%-------------------------
+Anton & biddable Domain & User of the system & Contextdiagram\\
+\hline
+%-------------------------
+%-------------------------
+\multicolumn{4}{|l|}{\textbf{B}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{C}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{D}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{E}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{F}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{G}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{H}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{I}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{J}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{K}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{L}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{M}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{N}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{O}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{P}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{Q}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{R}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{S}}\\
+\hline
+Stakeholder & biddable Domain & User of the system & contextdiagram\\
+\hline
+\multicolumn{4}{|l|}{\textbf{T}}\\
+\hline
+TOS & machine Domain & Software & contextdiagram\\
+\hline
+\multicolumn{4}{|l|}{\textbf{U}}\\
+\hline
+User & biddable Domain & User of the system & contextdiagram\\
+\hline
+\multicolumn{4}{|l|}{\textbf{V}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{W}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{X}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{Y}}\\
+\hline
+&  &  & \\
+\hline
+\multicolumn{4}{|l|}{\textbf{Z}}\\
+\hline
+ &  &  & \\
+\hline
+\end{longtable}
+
+\end{document}
