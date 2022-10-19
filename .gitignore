@@ -1,2 +1,6 @@
 *.zip
 *.bkp
+*.gz
+*.log
+*.bak
+*.DS_Store

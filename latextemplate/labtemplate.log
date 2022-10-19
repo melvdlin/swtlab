@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2022.10.6)  11 OCT 2022 23:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.12) (preloaded format=pdflatex 2022.10.6)  19 OCT 2022 13:13
 entering extended mode
 **./labtemplate.tex
 (labtemplate.tex
@@ -1153,10 +1153,10 @@ File: bkm-pdftex.def 2020-11-06 v1.29 bookmark driver for pdfTeX (HO)
 \BKM@id=\count342
 ))
 Package epstopdf Info: Source file: <figures/logo_uni.eps>
-(epstopdf)                    date: 2015-06-16 13:34:54
+(epstopdf)                    date: 2022-10-18 09:15:12
 (epstopdf)                    size: 386032 bytes
 (epstopdf)             Output file: <figures/logo_uni-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-06-16 13:34:54
+(epstopdf)                    date: 2022-10-18 09:15:12
 (epstopdf)                    size: 18979 bytes
 (epstopdf)             Command: <miktex-epstopdf-unrestricted --outfile=figures
 /logo_uni-eps-converted-to.pdf figures/logo_uni.eps>
@@ -1303,7 +1303,7 @@ Package rerunfilecheck Info: File `labtemplate.out' has not changed.
 Here is how much of TeX's memory you used:
  29293 strings out of 478363
  569177 string characters out of 2836985
- 1155890 words of memory out of 3000000
+ 1155913 words of memory out of 3000000
  47178 multiletter control sequences out of 15000+600000
  474707 words of font info for 49 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1325,7 +1325,7 @@ pe1/public/amsfonts/cm/cmssbx10.pfb><C:/Users/Melvin/AppData/Local/Programs/MiK
 TeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/Melvin/AppData/Local/Pr
 ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/Melvin/AppData
 /Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on labtemplate.pdf (13 pages, 271821 bytes).
+Output written on labtemplate.pdf (13 pages, 272066 bytes).
 PDF statistics:
  274 PDF objects out of 1000 (max. 8388607)
  44 named destinations out of 1000 (max. 500000)

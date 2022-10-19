@@ -78,9 +78,9 @@
 %-------------------- Declaration part --------------------------------------------
 %-------------------- Here you have to add all group members, your lab date -------
 %-------------------- and the name of your supervisor -----------------------------
-\students{Student 1 (1234567)\\Student 2 (1234567)\\Student 3 (1234567)\\Student 4 (1234567)\\Student 5 (1234567)}
+\students{Student 1 (1234567)\\Student 2 (1234567)\\Student 3 (1234567)\\Student 4 (1234567)\\Student 5 (1234567)\\Student 6 (1234567)}
 \labtime{Mo. 10-12}
-\supervisor{Roman Wirtz}{roman.wirtz@stud.uni-due.de}
+\supervisor{Mustermensch}{muster.mensch@stud.uni-due.de}
 %----------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------
 
@@ -102,7 +102,7 @@
 \vspace*{1mm}
 \begin{flushright}
 \Large{Lab for Software Engineering}\linebreak
-\large{Winter term 2015/2016}\linebreak
+\large{Winter term 2022/2023}\linebreak
 \end{flushright}
 \end{minipage}
 \hspace*{-18mm}
@@ -114,7 +114,7 @@
 
 \textit{Lab for Software Engineering}\vspace*{4mm}
 
-\Huge{Online Banking Application}\vspace*{7mm}
+\Huge{Cinema Management Application}\vspace*{7mm}
 
 \Large{\vstudents}\vspace*{9mm}
 
