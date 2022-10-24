@@ -341,7 +341,11 @@ State diagrams with tikZ:
 %--------The line between two rows is added with \hline.
 %-------------------------
 %-------------------------
-Anton & biddable Domain & User of the system & Contextdiagram\\
+addCustomer & phenomenon & the machinea adds a customer to the CustomersDatabase & CD\\
+\hline
+addShowings & phenomenon & the machine adds a showing to the ShowingsDatabase & CD\\
+\hline
+addStaffMember & phenomenon & the machine adds a staff account to the StaffDatabase & CD\\
 \hline
 %-------------------------
 %-------------------------
@@ -351,7 +355,21 @@ Anton & biddable Domain & User of the system & Contextdiagram\\
 \hline
 \multicolumn{4}{|l|}{\textbf{C}}\\
 \hline
-&  &  & \\
+Customer & biddable domain & a customer of UDEKino & CD\\
+\hline
+CustomersDatabase & lexical domain & the database of Customer accounts & CD\\
+\hline
+cBook & phenomenon & a customer books tickets for a showing & CD\\
+\hline
+cBrowse & phenomenon & a customer browses available showings & CD\\
+\hline
+cLogin & phenomenon & a customer attempts to log in & CD\\
+\hline
+cLogout & phenomenon & a customer attempts to log out & CD\\
+\hline
+cRegister & phenomenon & a customer attempts to register create an account on UDEKino & CD\\
+\hline
+cShowWebsite & phenomenon & the machine shows a website to the Customer & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{D}}\\
 \hline
@@ -359,7 +377,7 @@ Anton & biddable Domain & User of the system & Contextdiagram\\
 \hline
 \multicolumn{4}{|l|}{\textbf{E}}\\
 \hline
-&  &  & \\
+Email & causal domain, connection domain & an e-mail service offering to deliver e-mails & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{F}}\\
 \hline
@@ -391,11 +409,11 @@ Anton & biddable Domain & User of the system & Contextdiagram\\
 \hline
 \multicolumn{4}{|l|}{\textbf{M}}\\
 \hline
-&  &  & \\
+modifyShowing & phenomenon & the machine modifies a showing in the database & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{N}}\\
 \hline
-&  &  & \\
+notifyCustomer & phenomenon & the machine notifies the customer via e-mail & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{O}}\\
 \hline
@@ -415,15 +433,27 @@ Anton & biddable Domain & User of the system & Contextdiagram\\
 \hline
 \multicolumn{4}{|l|}{\textbf{S}}\\
 \hline
-Stakeholder & biddable Domain & User of the system & contextdiagram\\
+sAddShowing & phenomenon & a staff member submits a new showing to the machine for entry into the database & CD\\
+\hline
+sBrowse & phenomenon & a staff member browses available showings & CD\\
+\hline
+sCancelShowing & phenomenon & a staff member attempts to cancel a showing & CD\\
+\hline
+ShowingsDatabase & lexical domain & the database of Showings & CD\\
+\hline
+sShowWebsite & phenomenon & the machine shows a website to the StaffMember & CD\\
+\hline
+StaffDatabase & lexical domain & the database of Staff accounts & CD\\
+\hline
+StaffMember & biddable domain & a member of UDEKino staff & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{T}}\\
 \hline
-TOS & machine Domain & Software & contextdiagram\\
+&  &  & \\
 \hline
 \multicolumn{4}{|l|}{\textbf{U}}\\
 \hline
-User & biddable Domain & User of the system & contextdiagram\\
+&  &  & \\
 \hline
 \multicolumn{4}{|l|}{\textbf{V}}\\
 \hline
@@ -439,7 +469,11 @@ User & biddable Domain & User of the system & contextdiagram\\
 \hline
 \multicolumn{4}{|l|}{\textbf{Y}}\\
 \hline
-&  &  & \\
+yieldCustomers & phenomenon & the CustomersDatabase yields its stored Customer accounts & CD\\
+\hline
+yieldShowings & phenomenon & the ShowingsDatabase yields its stored Showings & CD\\
+\hline
+yieldStaff & phenomenon & the StaffDatabase yields its stored Staff accounts & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{Z}}\\
 \hline
