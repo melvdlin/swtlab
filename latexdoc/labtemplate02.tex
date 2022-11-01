@@ -55,8 +55,8 @@
 
 
 \usepackage[pdftex,	pdfauthor={},
-				pdftitle={Online Banking Application},
-				pdfsubject={Lab for Software Engineering WS15/16}, 
+				pdftitle={Cinema Management Application},
+				pdfsubject={Lab for Software Engineering WS22/23}, 
 				breaklinks=true, 
 				colorlinks=true, 
 				linkcolor=black,
@@ -78,7 +78,7 @@
 %-------------------- Declaration part --------------------------------------------
 %-------------------- Here you have to add all group members, your lab date -------
 %-------------------- and the name of your supervisor -----------------------------
-\students{Ifrat Jahan (3098878)\\Jenniffer Maxisch (3106694)\\Georgios Adamos (3093306)\\Thomas Klimek (3067855)\\Melvin van der Linde (3106762)}
+\students{Ifrat Jahan (3098878)\\Jennifer Maxisch (3106694)\\Georgios Adamos (3093306)\\Thomas Klimek (3067855)\\Melvin van der Linde (3106762)}
 \labtime{Do. 12-14}
 \supervisor{Marcel Schweikert}{marcel.schweikert@stud.uni-due.de} % email unconfirmed
 %----------------------------------------------------------------------------------
@@ -156,21 +156,17 @@
 
 \subsubsection{Requirements}
 \begin{enumerate}[R1]
-	\item Customers can create an account by providing an e-mail address and a password.
-	\item If an e-mail address which is already associated with an account is provided during registration, account creation fails.
+	\item Customers can create an account by providing an e-mail address and a password. If an e-mail address which is already associated with an account is provided, account creation fails.
     \item Customers can log in by providing their e-mail address and their password.
     \item A logged in customer can log out.
     \item A customer can browse available showings, ascendingly sorted by date.
-    \item A logged in customer can book tickets by selecting the showing from the browsing list and selecting the desired seats.
-    \item A showing can only be booked up to 15 minutes before it starts.
+    \item A logged in customer can book tickets by selecting the showing from the browsing list and selecting the desired seats. A showing can only be booked up to 15 minutes before it starts.
     \item Staff can add new showings to the database by providing the required data.
     \item Once a showing starts it is marked as "archived".
     \item Archived showings are visible to staff, but not to customers.
-    \item Staff can cancel showings.
-    \item When a showing is cancelled it is deleted.
-    \item When a showing is cancelled the customers who booked tickets for it are notified via e-mail.
+    \item Staff can cancel showings. When a show is cancelled all customers who booked tickets for it are notified via e-mail and the showing is then deleted.
     \item Showings which took place a year ago or longer are automatically removed from the database.
-    \item When a showing is deleted its associated bookings are also deleted
+    \item When a showing is deleted its associated bookings are also deleted.
     
 \end{enumerate}
 
@@ -186,7 +182,6 @@
 	\item A web application is a good choice for implementing the desired functionality and all customers are able to use it.
 	\item Customers only provide e-mail addresses they can access.
     \item Customers will stay up to date with the list of available showings.
-    \item The cinema operator has provied a predifned list of cinema halls.
     \item Every booking is paid via an external service.
     \item Staff will only add showings which take place in the future.
 \end{enumerate}
@@ -341,6 +336,8 @@ State diagrams with tikZ:
 %--------The line between two rows is added with \hline.
 %-------------------------
 %-------------------------
+addBooking & phenomenom & the machine adds a booking to the BookingsDatabase & CD\\
+\hline
 addCustomer & phenomenon & the machinea adds a customer to the CustomersDatabase & CD\\
 \hline
 addShowings & phenomenon & the machine adds a showing to the ShowingsDatabase & CD\\
@@ -351,13 +348,13 @@ addStaffMember & phenomenon & the machine adds a staff account to the StaffDatab
 %-------------------------
 \multicolumn{4}{|l|}{\textbf{B}}\\
 \hline
-&  &  & \\
+BookingsDatabase & lexical domain, designed domain & the database of bookings made by customers & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{C}}\\
 \hline
 Customer & biddable domain & a customer of UDEKino & CD\\
 \hline
-CustomersDatabase & lexical domain & the database of Customer accounts & CD\\
+CustomersDatabase & lexical domain, designed domain & the database of Customer accounts & CD\\
 \hline
 cBook & phenomenon & a customer books tickets for a showing & CD\\
 \hline
@@ -405,8 +402,9 @@ Email & causal domain, connection domain & an e-mail service offering to deliver
 \hline
 \multicolumn{4}{|l|}{\textbf{L}}\\
 \hline
-&  &  & \\
+LoggedInCustomer & biddable domain & a customer who has logged into their account & CD\\
 \hline
+lcShowWebsite & phenomenon & the machine shows a website to the LoggedInCustomer & CD\\
 \multicolumn{4}{|l|}{\textbf{M}}\\
 \hline
 modifyShowing & phenomenon & the machine modifies a showing in the database & CD\\
@@ -439,11 +437,11 @@ sBrowse & phenomenon & a staff member browses available showings & CD\\
 \hline
 sCancelShowing & phenomenon & a staff member attempts to cancel a showing & CD\\
 \hline
-ShowingsDatabase & lexical domain & the database of Showings & CD\\
+ShowingsDatabase & lexical domain, designed domain & the database of Showings & CD\\
 \hline
 sShowWebsite & phenomenon & the machine shows a website to the StaffMember & CD\\
 \hline
-StaffDatabase & lexical domain & the database of Staff accounts & CD\\
+StaffDatabase & lexical domain, designed domain & the database of Staff accounts & CD\\
 \hline
 StaffMember & biddable domain & a member of UDEKino staff & CD\\
 \hline
