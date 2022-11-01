@@ -56,9 +56,9 @@
 
 \usepackage[pdftex,	pdfauthor={},
 				pdftitle={Cinema Management Application},
-				pdfsubject={Lab for Software Engineering WS22/23}, 
-				breaklinks=true, 
-				colorlinks=true, 
+				pdfsubject={Lab for Software Engineering WS22/23},
+				breaklinks=true,
+				colorlinks=true,
 				linkcolor=black,
 				urlcolor=blue,%blue
 				citecolor=red,%red
@@ -66,13 +66,13 @@
 %   			    	pdffitwindow=true,
         			a4paper=true,
 				plainpages=false,
-				pdfpagelabels,     
+				pdfpagelabels,
 				pageanchor=false,
 				pdfstartpage=1,
            ]{hyperref}
 
 
-\begin{document} 
+\begin{document}
 
 
 %-------------------- Declaration part --------------------------------------------
@@ -167,7 +167,7 @@
     \item Staff can cancel showings. When a show is cancelled all customers who booked tickets for it are notified via e-mail and the showing is then deleted.
     \item Showings which took place a year ago or longer are automatically removed from the database.
     \item When a showing is deleted its associated bookings are also deleted.
-    
+
 \end{enumerate}
 
 \subsubsection{Facts}
@@ -315,13 +315,13 @@ State diagrams with tikZ:
 \chapter{Glossary}
 
 \begin{longtable}{|l|l|p{5cm}|l|}
-\caption{Glossary} 
-\label{table:glossar}\\ 
+\caption{Glossary}
+\label{table:glossar}\\
 \hline
 \rowcolor{black!25}\textbf{Name} & \textbf{Type} & \textbf{Description} & \textbf{Source}\\
 \hline
 \endfirsthead
-\caption[]{Glossar}\\ 
+\caption[]{Glossary}\\
 \hline
 \rowcolor{black!25}\textbf{Name} & \textbf{Type} & \textbf{Description} & \textbf{Source}\\
 \endhead
@@ -336,45 +336,35 @@ State diagrams with tikZ:
 %--------The line between two rows is added with \hline.
 %-------------------------
 %-------------------------
-addBooking & phenomenom & the machine adds a booking to the BookingsDatabase & CD\\
-\hline
-addCustomer & phenomenon & the machinea adds a customer to the CustomersDatabase & CD\\
-\hline
-addShowings & phenomenon & the machine adds a showing to the ShowingsDatabase & CD\\
-\hline
-addStaffMember & phenomenon & the machine adds a staff account to the StaffDatabase & CD\\
+addShowing & phenomenon & a \hyperlink{glossary:StaffMember}{staff member} submits a new showing to the machine for entry into the database & CD\\
 \hline
 %-------------------------
 %-------------------------
 \multicolumn{4}{|l|}{\textbf{B}}\\
 \hline
-BookingsDatabase & lexical domain, designed domain & the database of bookings made by customers & CD\\
+\hypertarget{glossary:bookTickets}{bookTickets} & phenomenon & a \hyperlink{glossary:Customer}{customer} books tickets for a showing & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{C}}\\
 \hline
-Customer & biddable domain & a customer of UDEKino & CD\\
+\hypertarget{glossary:Customer}{Customer} & biddable domain & a customer of UDEKino; a \hyperlink{glossary:User}{user} who has logged into a customer account & CD\\
 \hline
-CustomersDatabase & lexical domain, designed domain & the database of Customer accounts & CD\\
+\hypertarget{glossary:cBrowse}{cBrowse} & phenomenon & a \hyperlink{glossary:Customer}{customer} browses available showings & CD\\
 \hline
-cBook & phenomenon & a customer books tickets for a showing & CD\\
+\hypertarget{glossary:cLogin}{cLogin} & phenomenon & a \hyperlink{glossary:User}{user} attempts to log into a \hyperlink{glossary:Customer}{customer} account & CD\\
 \hline
-cBrowse & phenomenon & a customer browses available showings & CD\\
+\hypertarget{glossary:cLogout}{cLogout} & phenomenon & a \hyperlink{glossary:Customer}{customer} attempts to log out & CD\\
 \hline
-cLogin & phenomenon & a customer attempts to log in & CD\\
+\hypertarget{glossary:cRegister}{cRegister} & phenomenon & a \hyperlink{glossary:User}{user} attempts to create customer account on UDEKino & CD\\
 \hline
-cLogout & phenomenon & a customer attempts to log out & CD\\
-\hline
-cRegister & phenomenon & a customer attempts to register create an account on UDEKino & CD\\
-\hline
-cShowWebsite & phenomenon & the machine shows a website to the Customer & CD\\
+\hypertarget{glossary:cShowWebsite}{cShowWebsite} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} shows a website to the \hyperlink{glossary:Customer}{customer} & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{D}}\\
 \hline
-&  &  & \\
+\hypertarget{glossary:displayNotification}{displayNotification} & phenomenon & the \hyperlink{glossary:Customer}{customer's} \hyperlink{glossary:Email}{e-mail client} displays a \hyperlink{glossary:notifyCustomer}{notification e-mail} to the \hyperlink{glossary:Customer}{customer} & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{E}}\\
 \hline
-Email & causal domain, connection domain & an e-mail service offering to deliver e-mails & CD\\
+\hypertarget{glossary:Email}{Email} & causal domain, connection domain & an e-mail service offering to deliver e-mails & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{F}}\\
 \hline
@@ -386,7 +376,7 @@ Email & causal domain, connection domain & an e-mail service offering to deliver
 \hline
 \multicolumn{4}{|l|}{\textbf{H}}\\
 \hline
-&  &  & \\
+\hypertarget{glossary:HallsDatabase}{HallsDatabase} & lexical domain & a database containing the cinema halls, provided by the cinema operator & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{I}}\\
 \hline
@@ -401,17 +391,15 @@ Email & causal domain, connection domain & an e-mail service offering to deliver
 &  &  & \\
 \hline
 \multicolumn{4}{|l|}{\textbf{L}}\\
+&  &  & \\
 \hline
-LoggedInCustomer & biddable domain & a customer who has logged into their account & CD\\
-\hline
-lcShowWebsite & phenomenon & the machine shows a website to the LoggedInCustomer & CD\\
 \multicolumn{4}{|l|}{\textbf{M}}\\
 \hline
-modifyShowing & phenomenon & the machine modifies a showing in the database & CD\\
+&  &  & \\
 \hline
 \multicolumn{4}{|l|}{\textbf{N}}\\
 \hline
-notifyCustomer & phenomenon & the machine notifies the customer via e-mail & CD\\
+\hypertarget{glossary:notifyCustomer}{notifyCustomer} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} notifies the \hyperlink{glossary:Customer}{customer} via \hyperlink{glossary:Email}{e-mail} & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{O}}\\
 \hline
@@ -419,7 +407,7 @@ notifyCustomer & phenomenon & the machine notifies the customer via e-mail & CD\
 \hline
 \multicolumn{4}{|l|}{\textbf{P}}\\
 \hline
-&  &  & \\
+\hypertarget{glossary:provideHalls}{provideHalls} & phenomenon & the \hyperlink{glossary:HallsDatabase}{halls database} provides the halls data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{Q}}\\
 \hline
@@ -431,19 +419,16 @@ notifyCustomer & phenomenon & the machine notifies the customer via e-mail & CD\
 \hline
 \multicolumn{4}{|l|}{\textbf{S}}\\
 \hline
-sAddShowing & phenomenon & a staff member submits a new showing to the machine for entry into the database & CD\\
+\hypertarget{glossary:sBrowse}{sBrowse} & phenomenon & a \hyperlink{glossary:StaffMember}{staff member} browses available showings & CD\\
 \hline
-sBrowse & phenomenon & a staff member browses available showings & CD\\
+\hypertarget{glossary:sCancelShowing}{sCancelShowing} & phenomenon & a \hyperlink{glossary:StaffMember}{staff member} attempts to cancel a showing & CD\\
 \hline
-sCancelShowing & phenomenon & a staff member attempts to cancel a showing & CD\\
+\hypertarget{glossary:sLogin}{sLogin} & phenomenon & a \hyperlink{glossary:User}{user} attempts to log in as a \hyperlink{glossary:StaffMember}{staff member} & CD\\
 \hline
-ShowingsDatabase & lexical domain, designed domain & the database of Showings & CD\\
+\hypertarget{glossary:sLogout}{sLogout} & phenomenon & a \hyperlink{glossary:StaffMember}{staff member} attempts to log out & CD\\\hline
+\hypertarget{glossary:sShowWebsite}{sShowWebsite} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} shows a website to the \hyperlink{glossary:StaffMember}{staff member} & CD\\
 \hline
-sShowWebsite & phenomenon & the machine shows a website to the StaffMember & CD\\
-\hline
-StaffDatabase & lexical domain, designed domain & the database of Staff accounts & CD\\
-\hline
-StaffMember & biddable domain & a member of UDEKino staff & CD\\
+\hypertarget{glossary:StaffMember}{StaffMember} & biddable domain & a member of cinema staff; a \hyperlink{glossary:User}{user} who has logged in as staff & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{T}}\\
 \hline
@@ -451,11 +436,17 @@ StaffMember & biddable domain & a member of UDEKino staff & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{U}}\\
 \hline
-&  &  & \\
+\hypertarget{glossary:uBrowse}{uBrowse} & phenomenon & a \hyperlink{glossary:User}{user} browses available showings & CD\\
+\hline
+\hypertarget{glossary:UDEKino}{UDEKino} & machine & the machine to be developed & CD\\
+\hline
+\hypertarget{glossary:User}{User} & biddable domain & a user of the \hyperlink{glossary:UDEKino}{application} who is not logged in & CD\\
+\hline
+\hypertarget{glossary:uShowWebsite}{uShowWebsite} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} shows a website to the \hyperlink{glossary:User}{user} & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{V}}\\
 \hline
-%&  &  & \\
+&  &  & \\
 \hline
 \multicolumn{4}{|l|}{\textbf{W}}\\
 \hline
@@ -467,15 +458,11 @@ StaffMember & biddable domain & a member of UDEKino staff & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{Y}}\\
 \hline
-yieldCustomers & phenomenon & the CustomersDatabase yields its stored Customer accounts & CD\\
-\hline
-yieldShowings & phenomenon & the ShowingsDatabase yields its stored Showings & CD\\
-\hline
-yieldStaff & phenomenon & the StaffDatabase yields its stored Staff accounts & CD\\
+&  &  & \\
 \hline
 \multicolumn{4}{|l|}{\textbf{Z}}\\
 \hline
- &  &  & \\
+&  &  & \\
 \hline
 \end{longtable}
 
