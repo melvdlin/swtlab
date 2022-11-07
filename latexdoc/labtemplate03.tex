@@ -157,11 +157,11 @@
 
 \subsubsection{Requirements}
 \begin{enumerate}[R1]
-	\item Customers can create an account by providing an e-mail address and a password. If an e-mail address which is already associated with an account is provided, account creation fails.
+	\item\label{enum:R1} Customers can create an account by providing an e-mail address and a password. If an e-mail address which is already associated with an account is provided, account creation fails.
     \item Customers can log in by providing their e-mail address and their password.
     \item A logged in customer can log out.
     \item A customer can browse available showings, ascendingly sorted by date.
-    \item A logged in customer can book tickets by selecting the showing from the browsing list and selecting the desired seats. A showing can only be booked up to 15 minutes before it starts.
+    \item\label{enum:R5} A logged in customer can book tickets by selecting the showing from the browsing list and selecting the desired seats. A showing can only be booked up to 15 minutes before it starts.
     \item Staff can add new showings to the database by providing the required data.
     \item Once a showing starts it is marked as \enquote{archived}.
     \item Archived showings are visible to staff, but not to customers.
@@ -205,11 +205,38 @@
 We can derive the following problem diagrams
 
 \begin{figure}[H]
-	\centering
-  	\includegraphics[width=0.9\textwidth]{figures/A2/pdR1.pdf}
-	\caption{Problemdiagram for R1}
-	\label{figure:pdR1}
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/03/a03_problem_diagram_1-PD.pdf}
+    \caption{Problem diagram for R\ref{enum:R1}}
+    \label{figure:pdR1}
 \end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/03/a03_problem_diagram_1-Mapping.pdf}
+    \caption{Mapping diagram for R\ref{enum:R1}}
+    \label{figure:mdR1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/03/a03_problem_diagram_3-PD.pdf}
+    \caption{Problem diagram for R\ref{enum:R5}}
+    \label{figure:pdR5}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/03/a03_problem_diagram_3-Mapping.pdf}
+    \caption{Mapping diagram for R\ref{enum:R5}}
+    \label{figure:mdR5}
+\end{figure}
+
+\subsection*{Frames}
+\begin{itemize}
+    \item R\ref{enum:R1} fits to update
+    \item R\ref{enum:R5} fits to update
+\end{itemize}
 
 \newpage\section{A3}
 
@@ -315,7 +342,7 @@ State diagrams with tikZ:
 %-------------------------
 \chapter{Glossary}
 
-\begin{longtable}{|l|l|p{5cm}|l|}
+\begin{longtable}{|l|p{3cm}|p{5cm}|l|}
 \caption{Glossary}
 \label{table:glossar}\\
 \hline
@@ -347,6 +374,14 @@ State diagrams with tikZ:
 %-------------------------
 \multicolumn{4}{|l|}{\textbf{B}}\\
 \hline
+\hypertarget{glossary:bookingFailed}{bookingFailed} & phenomenon & \hyperlink{glossary:UDEKino}{the machine} notifies \hyperlink{glossary:WebpageBookTickets}{the webpage} that a booking has failed & PD R\ref{enum:R5}\\
+\hline
+\hypertarget{glossary:bookingFailedNotification}{bookingFailedNotification} & phenomenon & \hyperlink{glossary:WebpageBookTickets}{the webpage} displays a notification to \hyperlink{glossary:Customer}{the customer} that a booking has failed & PD R\ref{enum:R5}\\
+\hline
+\hypertarget{glossary:bookingSuccess}{bookingSuccess} & phenomenon & \hyperlink{glossary:UDEKino}{the machine} notifies \hyperlink{glossary:WebpageBookTickets}{the webpage} that a booking has succeeded & PD R\ref{enum:R5}\\
+\hline
+\hypertarget{glossary:bookingSuccessNotification}{bookingSuccessNotification} & phenomenon & \hyperlink{glossary:WebpageBookTickets}{the webpage} displays a notification to \hyperlink{glossary:Customer}{the customer} that a booking has succeeded & PD R\ref{enum:R5}\\
+\hline
 \hypertarget{glossary:BookingsDatabase}{BookingsDatabase} & lexical domain, designed domain & a database containing the bookings made by \hyperlink{glossary:Customer}{customers} & CD\\
 \hline
 \hypertarget{glossary:bookTickets}{bookTickets} & phenomenon & a \hyperlink{glossary:Customer}{customer} books tickets for a showing & CD\\
@@ -377,7 +412,9 @@ State diagrams with tikZ:
 \hline
 \multicolumn{4}{|l|}{\textbf{F}}\\
 \hline
-&  &  & \\
+\hypertarget{glossary:forwardBookings}{forwardBookings} & phenomenon & \hyperlink{glossary:WebpageBookTickets}{the webpage} forwards a request to book tickets to \hyperlink{glossary:UDEKino}{the machine} & PD R\ref{enum:R5}\\
+\hline
+\hypertarget{glossary:forwardSubmitRegistration}{forwardSubmitRegistration} & phenomenon & \hyperlink{glossary:WebpageRegisterCustomer}{the webpage} forwards a request to register a \hyperlink{glossary:Customer}{customer account} to \hyperlink{glossary:UDEKino}{the machine} & PD R\ref{enum:R5}\\
 \hline
 \multicolumn{4}{|l|}{\textbf{G}}\\
 \hline
@@ -415,11 +452,11 @@ State diagrams with tikZ:
 &  &  & \\
 \hline
 \multicolumn{4}{|l|}{\textbf{P}}\\
-\hline\hline
+\hline
 \hypertarget{glossary:provideBookings}{provideBookings} & phenomenon & the \hyperlink{glossary:BookingsDatabase}{bookings database} provides the bookings data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
-\hline\hline
+\hline
 \hypertarget{glossary:provideCustomers}{provideCustomers} & phenomenon & the \hyperlink{glossary:CustomersDatabase}{customers database} provides the customers data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
-\hline\hline
+\hline
 \hypertarget{glossary:provideHalls}{provideHalls} & phenomenon & the \hyperlink{glossary:HallsDatabase}{halls database} provides the halls data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
 \hline
 \hypertarget{glossary:provideShowings}{provideShowings} & phenomenon & the \hyperlink{glossary:ShowingsDatabase}{showings database} provides the showings data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
@@ -430,9 +467,17 @@ State diagrams with tikZ:
 \hline
 \multicolumn{4}{|l|}{\textbf{R}}\\
 \hline
+\hypertarget{glossary:registrationFailed}{registrationFailed} & phenomenon & \hyperlink{glossary:UDEKino}{the machine} notifies \hyperlink{glossary:WebpageRegisterCustomer}{the webpage} that the registration has failed & PD R\ref{enum:R1}\\
+\hline
+\hypertarget{glossary:registrationFailedNotification}{registrationFailedNotification} & phenomenon & \hyperlink{glossary:WebpageRegisterCustomer}{the webpage} displays a to \hyperlink{glossary:User}{the user} that the registration has failed & PD R\ref{enum:R1}\\
+\hline
+\hypertarget{glossary:registrationSuccess}{registrationSuccess} & phenomenon & \hyperlink{glossary:UDEKino}{the machine} notifies \hyperlink{glossary:WebpageRegisterCustomer}{the webpage} that the registration has succeeded & PD R\ref{enum:R1}\\
+\hline
+\hypertarget{glossary:registrationSuccessNotification}{registrationSuccessNotification} & phenomenon & \hyperlink{glossary:WebpageRegisterCustomer}{the webpage} displays a notification to \hyperlink{glossary:User}{the user} that the registration has succeeded & PD R\ref{enum:R1}\\
+\hline
 \hypertarget{glossary:removeBooking}{removeBooking} & phenomenon &  \hyperlink{glossary:UDEKino}{the machine} removes a booking from the \hyperlink{glossary:BookingsDatabase}{bookings database} & CD\\
 \hline
-\hypertarget{glossary:removeBookin}{removeCustomer} & phenomenon &  \hyperlink{glossary:UDEKino}{the machine} removes a \hyperlink{glossary:Customer}{customer} from the \hyperlink{glossary:CustomersDatabase}{customers database} & CD\\
+\hypertarget{glossary:removeBooking}{removeCustomer} & phenomenon &  \hyperlink{glossary:UDEKino}{the machine} removes a \hyperlink{glossary:Customer}{customer} from the \hyperlink{glossary:CustomersDatabase}{customers database} & CD\\
 \hline
 \hypertarget{glossary:Showing}{removeShowing} & phenomenon &  \hyperlink{glossary:UDEKino}{the machine} removes a showing from the \hyperlink{glossary:ShowingsDatabase}{showings database} & CD\\
 \hline
@@ -446,10 +491,15 @@ State diagrams with tikZ:
 \hline
 \hypertarget{glossary:sLogin}{sLogin} & phenomenon & a \hyperlink{glossary:User}{user} attempts to log in as a \hyperlink{glossary:StaffMember}{staff member} & CD\\
 \hline
-\hypertarget{glossary:sLogout}{sLogout} & phenomenon & a \hyperlink{glossary:StaffMember}{staff member} attempts to log out & CD\\\hline
+\hypertarget{glossary:sLogout}{sLogout} & phenomenon & a \hyperlink{glossary:StaffMember}{staff member} attempts to log out & CD\\
+\hline
 \hypertarget{glossary:sShowWebsite}{sShowWebsite} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} shows a website to the \hyperlink{glossary:StaffMember}{staff member} & CD\\
 \hline
 \hypertarget{glossary:StaffMember}{StaffMember} & biddable domain & a member of cinema staff; a \hyperlink{glossary:User}{user} who has logged in as staff & CD\\
+\hline
+\hypertarget{glossary:submitBookings}{submitBookings} & phenomenon & the \hyperlink{glossary:Customer}{customer} selects the tickets they wish to book and hits the submit button &  PD R\ref{enum:R5}\\
+\hline
+\hypertarget{glossary:submitRegistration}{submitBookings} & phenomenon & the \hyperlink{glossary:User}{user} enters their e-mail address and desired password and hits the submit button & PD R\ref{enum:R1}\\
 \hline
 \hypertarget{glossary:submitShowing}{submitShowing} & phenomenon & a \hyperlink{glossary:StaffMember}{staff member} submits a new showing to the machine for entry into the database & CD\\
 \hline
@@ -473,7 +523,9 @@ State diagrams with tikZ:
 \hline
 \multicolumn{4}{|l|}{\textbf{W}}\\
 \hline
-&  &  & \\
+\hypertarget{glossary:WebpageBookTickets}{WebpageBookTickets} & connection domain, designed domain & A webpage via which a \hyperlink{glossary:Customer}{customer} can book tickets & PD R\ref{enum:R5}\\
+\hline
+\hypertarget{glossary:WebpageRegisterCustomer}{WebpageRegisterCustomer} & connection domain, designed domain & A webpage via which a \hyperlink{glossary:User}{user} can register a new \hyperlink{glossary:Customer}{customer account} & PD R\ref{enum:R1}\\
 \hline
 \multicolumn{4}{|l|}{\textbf{X}}\\
 \hline
