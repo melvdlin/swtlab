@@ -160,11 +160,11 @@
 	\item\label{enum:R1} Customers can create an account by providing an e-mail address and a password. If an e-mail address which is already associated with an account is provided, account creation fails.
     \item Customers can log in by providing their e-mail address and their password.
     \item A logged in customer can log out.
-    \item A customer can browse available showings, ascendingly sorted by date.
+    \item\label{enum:R4} A customer can browse available showings, ascendingly sorted by date.
     \item\label{enum:R5} A logged in customer can book tickets by selecting the showing from the browsing list and selecting the desired seats. A showing can only be booked up to 15 minutes before it starts.
     \item Staff can add new showings to the database by providing the required data.
-    \item Once a showing starts it is marked as \enquote{archived}.
-    \item Archived showings are visible to staff, but not to customers.
+    \item\label{enum:R7} Once a showing starts it is marked as \enquote{archived}.
+    \item\label{enum:R8} Archived showings are visible to staff, but not to customers.
     \item Staff can cancel showings. When a show is cancelled all customers who booked tickets for it are notified via e-mail and the showing is then deleted.
     \item Showings which took place a year ago or longer are automatically removed from the database.
     \item When a showing is deleted its associated bookings are also deleted.
@@ -232,10 +232,40 @@ We can derive the following problem diagrams
     \label{figure:mdR5}
 \end{figure}
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/04/a04_problem_diagram_2-PD.pdf}
+\caption{Problem diagram for R\ref{enum:R4} / R\ref{enum:R8}}
+\label{figure:pdR48}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/04/a04_problem_diagram_2-Mapping.pdf}
+\caption{Mapping diagram for R\ref{enum:R4} / R\ref{enum:R8}}
+\label{figure:mdR48}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/04/a04_problem_diagram_4-PD.pdf}
+\caption{Problem diagram for R\ref{enum:R7}}
+\label{figure:pdR7}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/04/a04_problem_diagram_4-Mapping.pdf}
+\caption{Mapping diagram for R\ref{enum:R7}}
+\label{figure:mdR7}
+\end{figure}
+
 \subsection*{Frames}
 \begin{itemize}
     \item R\ref{enum:R1} fits to update 2
     \item R\ref{enum:R5} fits to update 2
+    \item R\ref{enum:R4} / R\ref{enum:R8} fits to query 2
+    \item R\ref{enum:R7} fits to simple transformation
 \end{itemize}
 
 \newpage\section{A3}
@@ -414,6 +444,8 @@ State diagrams with tikZ:
 \hline
 \hypertarget{glossary:forwardBookings}{forwardBookings} & phenomenon & \hyperlink{glossary:WebpageBookTickets}{the webpage} forwards a request to book tickets to \hyperlink{glossary:UDEKino}{the machine} & PD R\ref{enum:R5}\\
 \hline
+\hypertarget{glossary:forwardNSUBrowse}{forwardNSUBrowse} & phenomenon & \hyperlink{glossary:WebPageNonStaffUserBrowse}{the website} sends a request for a list of upcoming showings to \hyperlink{glossary:UDEK-NonStaffUserBrowse}{the machine} & PD R\ref{enum:R4} / R\ref{enum:R8}\\
+\hline
 \hypertarget{glossary:forwardSubmitRegistration}{forwardSubmitRegistration} & phenomenon & \hyperlink{glossary:WebpageRegisterCustomer}{the webpage} forwards a request to register a \hyperlink{glossary:Customer}{customer account} to \hyperlink{glossary:UDEKino}{the machine} & PD R\ref{enum:R5}\\
 \hline
 \multicolumn{4}{|l|}{\textbf{G}}\\
@@ -441,11 +473,19 @@ State diagrams with tikZ:
 \hline
 \multicolumn{4}{|l|}{\textbf{M}}\\
 \hline
-\hypertarget{glossary:modifyShowing}{modifyShowing}& phenomenon & \hyperlink{glossary:UDEKino}{the machine} modifies a showing in the \hyperlink{glossary:ShowingsDatabase}{showings database} & CD\\
+\hypertarget{glossary:modifyShowing}{modifyShowing} & phenomenon & \hyperlink{glossary:UDEKino}{the machine} modifies a showing in the \hyperlink{glossary:ShowingsDatabase}{showings database} & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{N}}\\
 \hline
+\hypertarget{glossary:NonStaffUser}{NonStaffUser} & biddable domain & either of \hyperlink{glossary:Customer}{Customer} or \hyperlink{glossary:User}{User} & PD R\ref{enum:R4} / R\ref{enum:R8}\\
+\hline
 \hypertarget{glossary:notifyCustomer}{notifyCustomer} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} notifies the \hyperlink{glossary:Customer}{customer} via \hyperlink{glossary:Email}{e-mail} & CD\\
+\hline
+\hypertarget{glossary:nsuBrowse}{nsuBrowse} & phenomenon & either of \hyperlink{glossary:cBrowse}{cBrowse} or \hyperlink{glossary:uBrowse}{uBrowse} & PD R\ref{enum:R4} / R\ref{enum:R8}\\
+\hline
+\hypertarget{glossary:nsuShowings}{nsuShowings} & phenomenon & \hyperlink{glossary:UDEK-NonStaffUserBrowse}{the machine} sends a list of upcoming showings to be displayed by \hyperlink{glossary:WebPageNonStaffUserBrowse}{the website} & PD R\ref{enum:R4} / R\ref{enum:R8}\\
+\hline
+\hypertarget{glossary:nsuShowShowings}{nsuShowShowings} & phenomenon & \hyperlink{glossary:WebPageNonStaffUserBrowse}{the website} displays a list of upcoming showings to the \hyperlink{glossary:NonStaffUser}{user} & PD R\ref{enum:R4} / R\ref{enum:R8}\\
 \hline
 \multicolumn{4}{|l|}{\textbf{O}}\\
 \hline
@@ -515,9 +555,14 @@ State diagrams with tikZ:
 \hline
 \hypertarget{glossary:UDEKino}{UDEKino} & machine & the machine to be developed & CD\\
 \hline
+\hypertarget{glossary:UDEK-ArchiveShowings}{UDEK\_ArchiveShowings} & machine & the sub-\hyperlink{glossary:UDEKino}{machine} responsible for automatically archiving showings once they have begun & PD R\ref{enum:R7} \\
+\hline
+\hline
 \hypertarget{glossary:UDEK-BookTickets}{UDEK\_BookTickets} & machine & the sub-\hyperlink{glossary:UDEKino}{machine} responsible for \hyperlink{glossary:Customer}{customer} booking tickets & PD R\ref{enum:R5}\\
 \hline
-\hypertarget{glossary:UDEK-BookTickets}{UDEK\_RegisterCustomer} & machine & the sub-\hyperlink{glossary:UDEKino}{machine} responsible for \hyperlink{glossary:Customer}{customer} account registration & PD R\ref{enum:R1}\\
+\hypertarget{glossary:UDEK-NonStaffUserBrowse}{UDEK\_NonStaffUserBrowse} & machine & the sub-\hyperlink{glossary:UDEKino}{machine} responsible for \hyperlink{glossary:NonStaffUser}{registered and non-registered} customers browsing upcoming showings & PD R\ref{enum:R4} / R\ref{enum:R8}\\
+\hline
+\hypertarget{glossary:UDEK-RegisterCustomer}{UDEK\_RegisterCustomer} & machine & the sub-\hyperlink{glossary:UDEKino}{machine} responsible for \hyperlink{glossary:Customer}{customer} account registration & PD R\ref{enum:R1}\\
 \hline
 \hypertarget{glossary:User}{User} & biddable domain & a user of the \hyperlink{glossary:UDEKino}{application} who is not logged in & CD\\
 \hline
@@ -529,9 +574,11 @@ State diagrams with tikZ:
 \hline
 \multicolumn{4}{|l|}{\textbf{W}}\\
 \hline
-\hypertarget{glossary:WebpageBookTickets}{WebpageBookTickets} & connection domain, designed domain & A webpage via which a \hyperlink{glossary:Customer}{customer} can book tickets & PD R\ref{enum:R5}\\
+\hypertarget{glossary:WebpageBookTickets}{WebpageBookTickets} & connection domain, designed domain & a webpage via which a \hyperlink{glossary:Customer}{customer} can book tickets & PD R\ref{enum:R5}\\
 \hline
-\hypertarget{glossary:WebpageRegisterCustomer}{WebpageRegisterCustomer} & connection domain, designed domain & A webpage via which a \hyperlink{glossary:User}{user} can register a new \hyperlink{glossary:Customer}{customer account} & PD R\ref{enum:R1}\\
+\hypertarget{glossary:WebpageNonStaffUserBrowse}{WebpageNonStaffUserBrowse} & connection domain, designed domain & a webpage via which a \hyperlink{glossary:NonStaffUser}{user} can browse upcoming showings & PD R\ref{enum:R4} / R\ref{enum:R8}\\
+\hline
+\hypertarget{glossary:WebpageRegisterCustomer}{WebpageRegisterCustomer} & connection domain, designed domain & a webpage via which a \hyperlink{glossary:User}{user} can register a new \hyperlink{glossary:Customer}{customer account} & PD R\ref{enum:R1}\\
 \hline
 \multicolumn{4}{|l|}{\textbf{X}}\\
 \hline
