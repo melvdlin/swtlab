@@ -1,0 +1,20 @@
+context UDEK_RegisterCustomer
+inv: customerAccounts->isUnique(email)
+
+context UDEK_RegisterCustomer::forwardSubmitRegistration(email : String, password : String)
+pre: true
+post:
+    let eMailUnused : Boolean =
+        customerAccounts@pre->one(
+            c : CustomerAccount
+                | c.email = email
+        )
+    in let CustomerAccountExists : Boolean =
+        customerAccounts->one(
+            c : CustomerAccount
+                | c.email = email and c.password = password
+        )
+    in
+        if eMailUnused
+        then CustomerAccountExists and webpageRegisterCustomer^registrationSuccess()
+        else webpageRegisterCustomer^registrationFailed()

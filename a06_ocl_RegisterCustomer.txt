@@ -1,7 +1,0 @@
-Name: forwardSubmitRegistration
-Description: creates a Customer account with the provided e-mail and password and adds it to the CustomersDatabase and then sends a success notification to the webpage if the provided e-mail address is available, otherwise sends a failure notification to the webpage.
-OCL constraint:
-
-context WebpageRegisterCustomer::forwardSubmitRegistration(email : String, password : String)
-pre: true
-post: udek_registerCustomer

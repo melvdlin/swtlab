@@ -1,0 +1,10 @@
+context UDEK_NonStaffUserBrowse
+inv:
+    showings->isUnique(id)
+    and showings->forAll(
+        s : Showing
+            | s.isArchived = s.start > api.currentDateTime() - api.dateTimeSpanFromMinutes(15))
+
+context UDEK_NonStaffUserBrowse::forwardNSUBrowse()
+pre: true
+post: webpageNonStaffUserBrowse^nsuShowings(showings->select(s : Showing | not s.isArchived))

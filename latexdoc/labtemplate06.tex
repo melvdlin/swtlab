@@ -71,6 +71,21 @@
 				pdfstartpage=1,
            ]{hyperref}
 
+\lstset{
+    frame = tb,
+    language = Java,
+    showstringspaces = false,
+    columns = flexible,
+    basicstyle = {\large\ttfamily},
+    numbers = left,
+    numberstyle = \tiny\color{gray},
+    keywordstyle = \color{blue},
+    commentstyle = \color{dkgreen},
+    stringstyle = \color{mauve},
+    breaklines = true,
+    breakatwhitespace
+}
+
 \usepackage{csquotes}
 
 \begin{document}
@@ -283,13 +298,13 @@ We can derive the following problem diagrams
     Results are recieved via commands "registrationFailed" or "registrationSuccess" and displayed to the User via "registrationFailedNotification" / "registrationSuccessNotification".
 
     \item[S1b] \textbf{UDEK\_RegisterCustomer}\\
-    When the machine receives the command ``fowardSubmitRegistration'' the availability of the e-mail address is checked against existing Customer accounts in the CustomersDatabase via ``get\_customers''.
-    If the e-mail address is available, a new Customer account is created with the data from the forwarded request and added to the CustomersDatabase via ``addCustomers'' and a confirmation is sent to the WebpageRegisterCustomer via ``registrationSuccess''.
+    When the machine receives the command ``fowardSubmitRegistration'' the availability of the e-mail address is checked against existing Customer accounts in the CustomerAccount database via ``get\_customerAccounts''.
+    If the e-mail address is available, a new Customer account is created with the data from the forwarded request and added to the CustomerAccount database via ``addCustomerAccount'' and a confirmation is sent to the WebpageRegisterCustomer via ``registrationSuccess''.
     If the e-mail address is not available, account creation fails and a failure notification is sent to the WebpageRegisterCustomer via ``registrationFailed''.
 
-    \item[S1c] \textbf{CustomersDatabase}\\
-    When the database receives the command ``get\_customers'', all Customer accounts are returned as the data ``customers''.
-    When the database receives the command ``addCustomer'', the Customer account is added.
+    \item[S1c] \textbf{CustomerAccount}\\
+    When the database receives the command ``get\_customerAccounts'', all Customer accounts are returned as the data ``customerAccounts''.
+    When the database receives the command ``addCustomerAccount'', the Customer account is added.
 \end{itemize}
 
 $(A2) \land (S1a) \land (S1b) \land (S1c) \implies (R\ref{enum:R1})$
@@ -308,17 +323,17 @@ Results are received via ``bookingFailed'' or ``bookingSuccess'' and displayed t
 ``bookingFailedNotification'' / ``bookingSuccessNotification''
 
 \item[S2b] \textbf{UDEK\_BookTickets}
-When the machine receives the command ``forwardSubmitBooking'', the machine checks the availability of the desired showing and seats against the ShowingsDatabase, HallsDatabase and BookingsDatabase via ``get\_showings'', ``get\_halls'' and ``get\_bookings''.
-If the desired showing and seats exist, the showing begins in more than 15 minutes and the seats are not already booked, the booking is added to the BookingsDatabase via ``addBooking'' and a success notification is sent to the WebpageBookTickets via ``bookingSuccess''.
+When the machine receives the command ``forwardSubmitBooking'', the machine checks the availability of the desired showing and seats against the Showing database, Hall database and Booking database via ``get\_showings'', ``get\_halls'' and ``get\_bookings''.
+If the desired showing and seats exist, the showing begins in more than 15 minutes and the seats are not already booked, the booking is added to the Booking database via ``addBooking'' and a success notification is sent to the WebpageBookTickets via ``bookingSuccess''.
 Otherwise the booking fails and the Webpage is notified of the failure via ``bookingFailed''.
 
-\item[S2c] \textbf{ShowingsDatabase}
+\item[S2c] \textbf{Showing}
 When the database receives the command ``get\_showings'', all showings are returned as the data ``showings''.
 
-\item[S2d] \textbf{HallsDatabase}
+\item[S2d] \textbf{Hall}
 When the database receives the command ``get\_halls'', all halls are returned as the data ``halls''.
 
-\item[S2c] \textbf{BookingsDatabase}
+\item[S2c] \textbf{Booking}
 When the database receives the command ``get\_bookings'', all bookings are returned as the data ``bookings''.
 When the database receives the command ``addBooking'', the booking is added.
 
@@ -339,10 +354,10 @@ When the Webpage receives the command ``nsuBrowse'', the command is forwarded to
 Results are received via ``nsuShowings'' and displayed to NonStaffUser via ``nsuShowShowings''.
 
 \item[S3b] \textbf{UDEK\_NonStaffUserBrowse}
-When the machine receives the command "forwardNSUBrowse", the machine gets all showings from the ShowingsDatabase via ``get\_showings''.
+When the machine receives the command "forwardNSUBrowse", the machine gets all showings from the Showing database via ``get\_showings''.
 All non-archived showings are send/transfered to the Webpage via ``nsuShowings''.
 
-\item[S3c] \textbf{ShowingsDatabase}
+\item[S3c] \textbf{Showing}
 When the database receives the command ``get\_showings'', all showings are returned data as ``showings''
 
 \end{itemize}
@@ -360,7 +375,7 @@ $(S3a) \land (S3b) \land (S3c) \implies (R\ref{enum:R4}) \land (R\ref{enum:R8})$
 \item[S4a] \textbf{UDEK\_ArchiveShowings}
 When receiving the command ``checkStarted'', all showings which have already started, and are not yet marked as archived, are marked as archived using the command ``setArchived''.
 
-\item[S4b] \textbf{ShowingsDatabase}
+\item[S4b] \textbf{Showing}
 When receiving the command ``setArchived'', all showings which have already started, and are not yet marked as archived, are marked as archived.
 
 \end{itemize}
@@ -391,13 +406,38 @@ A short OCL example:\\
 %-------------------
 \lstset{language=OCL}          % Set your language (you can change the language for each code-block optionally)
 
-\begin{lstlisting}[frame=single,breaklines=true,numbers=left,numberfirstline=true]
-context Person inv: self.alter >=0
+\subsection{RegisterCustomer}
 
-pre alter>30
-post alter=alter@pre+1
+\begin{figure}[H]
+    \centering
+    \includegraphics[]{figures/06/a06_class_diagram_RegisterCustomer.pdf}
+    \caption{Class model of the operation RegisterCustomer}
+    \label{figure:operation_RegisterCustomer_class_diagram}
+\end{figure}
 
-\end{lstlisting}
+\textbf{Name:} forwardSubmitRegistration
+\\
+\textbf{Description:} Creates a new Customer Account with the supplied e-mail address and password and adds it to the database and then sends a success notification to the webpage, or sends a failure notification to the webpage
+\\
+\textbf{OCL constraint:}
+\lstinputlisting[language = OCL, frame = single]{listings/a06_RegisterCustomer.ocl}
+
+\subsection{NonStaffUserBrowse}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = \textwidth]{figures/06/a06_class_diagram_NonStaffUserBrowse.pdf}
+    \caption{Class model of the operation NonStaffUserBrowse}
+    \label{figure:operation_NonStaffUserBrowse_class_diagram}
+\end{figure}
+
+\textbf{Name:} forwardNSUBrowse
+\\
+\textbf{Description:} sends a set containing all showings which are not archived to the webpage
+\\
+\textbf{OCL constraint:}
+\lstinputlisting[language = OCL, frame = single]{listings/a06_NonStaffUserBrowse.ocl}
+
 
 \newpage\section{A6}
 
@@ -483,7 +523,7 @@ State diagrams with tikZ:
 %-------------------------
 \chapter{Glossary}
 
-\begin{longtable}{|l|p{3cm}|p{5cm}|l|}
+\begin{longtable}{|p{4.75cm}|p{3cm}|p{5cm}|l|}
 \caption{Glossary}
 \label{table:glossar}\\
 \hline
@@ -498,15 +538,19 @@ State diagrams with tikZ:
 \endfoot
 \multicolumn{4}{|l|}{\textbf{A}}\\
 \hline
-\hypertarget{glossary:addBooking}{addBooking} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} adds a new booking to the \hyperlink{glossary:BookingsDatabase}{bookings database} & CD\\
+\hypertarget{glossary:addBooking}{addBooking} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} adds a new booking to the \hyperlink{glossary:Booking}{bookings database} & CD\\
 \hline
 addBooking & message & contains a showing ID and seats & SD R5\\
 \hline
-\hypertarget{glossary:addCustomer}{addCustomer} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} adds a new \hyperlink{glossary:Customer}{customer} to the \hyperlink{glossary:CustomersDatabase}{customers database} & CD\\
+\hypertarget{glossary:addCustomerAccount}{addCustomerAccount} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} adds a new \hyperlink{glossary:Customer}{customer} to the \hyperlink{glossary:CustomerAccount}{customer accounts database} & CD\\
 \hline
-addCustomer & message & contains an e-mail address and a password & SD R\ref{enum:R1}\\
+addCustomerAccount & message & contains an e-mail address and a password & SD R\ref{enum:R1}\\
 \hline
-\hypertarget{glossary:addShowing}{addShowing} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} adds a new showing to the \hyperlink{glossary:ShowingsDatabase}{customers database} & CD\\
+\hypertarget{glossary:addShowing}{addShowing} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} adds a new showing to the \hyperlink{glossary:ShowingsDatabase}{customer accounts database} & CD\\
+\hline
+APIProvided & class & a class containing various auxiliary functions provided by the runtime environment & Class Model\\
+\hline
+api & class call name & an instance of the APIProvided class & Class Model\\
 \hline
 ApacheTomcat & connection domain & An Open Source JSP and Servlet Container from the Apache Foundation. & TCD\\
 \hline
@@ -521,7 +565,7 @@ ApacheTomcat & connection domain & An Open Source JSP and Servlet Container from
 %-------------------------
 \multicolumn{4}{|l|}{\textbf{B}}\\
 \hline
-BookingExists & state predicate & given booking exists within the BookingsDatabase & SD R5\\
+BookingExists & state predicate & given booking exists within the Booking database & SD R5\\
 \hline
 \hypertarget{glossary:bookingFailed}{bookingFailed} & phenomenon & \hyperlink{glossary:UDEKino}{the machine} notifies \hyperlink{glossary:WebpageBookTickets}{the webpage} that a booking has failed & PD R\ref{enum:R5}\\
 \hline
@@ -533,7 +577,9 @@ bookingFailedNotification & message & informs the user that the booking failed &
 \hline
 bookingIsValid & guard & showing with ID contained in request exists and starts in more than 15 minutes and the seats contained in the request exist in the showing's hall and are not already booked & SD R5\\
 \hline
-bookings & message & all bookings in the BookingsDatabase & PD R5\\
+\hypertarget{glossary:bookings}{bookings} & phenomenon & the \hyperlink{glossary:Booking}{bookings database} provides the bookings data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
+\hline
+bookings & message & all bookings in the Booking database & PD R5\\
 \hline
 \hypertarget{glossary:bookingSuccess}{bookingSuccess} & phenomenon & \hyperlink{glossary:UDEKino}{the machine} notifies \hyperlink{glossary:WebpageBookTickets}{the webpage} that a booking has succeeded & PD R\ref{enum:R5}\\
 \hline
@@ -543,9 +589,9 @@ bookingSuccess & message & informs the WebpageBookTickets that the booking was s
 \hline
 bookingSuccessNotification & message & informs the Customer that the booking was successful & SD R5\\
 \hline
-\hypertarget{glossary:BookingsDatabase}{BookingsDatabase} & lexical domain, designed domain & a database containing the bookings made by \hyperlink{glossary:Customer}{customers} & CD\\
+\hypertarget{glossary:Booking}{Booking} & lexical domain, designed domain & a database containing the bookings made by \hyperlink{glossary:Customer}{customers} & CD\\
 \hline
-BookingsDatabase & object & the database containing all bookings & SD R5\\
+Booking & object & the database containing all bookings & SD R5\\
 \hline
 \hypertarget{glossary:bookTickets}{bookTickets} & phenomenon & a \hyperlink{glossary:Customer}{customer} books tickets for a showing & CD\\
 \hline
@@ -563,47 +609,63 @@ checkStarted & found message & a prompt for the UDEK\_ArchiveShowings machine to
 \hline
 \hypertarget{glossary:cShowWebsite}{cShowWebsite} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} shows a website to the \hyperlink{glossary:Customer}{customer} & CD\\
 \hline
+currentDateTime() & auxiliary function & returns the current time in unix epoch time & Class Model\\
+\hline
 \hypertarget{glossary:Customer}{Customer} & biddable domain & a customer of UDEKino; a \hyperlink{glossary:User}{user} who has logged into a customer account & CD. TCD\\
 \hline
 Customer & actor & a customer who wishes to book tickets & SD R5\\
 \hline
-CustomerExists & state predicate & the customer account with the given e-mail address and password exists within the CustomersDatabase & SD R\ref{enum:R1}\\
+CustomerAccountExists & state predicate & the customer account with the given e-mail address and password exists within the CustomerAccount database & SD R\ref{enum:R1}\\
 \hline
-customers & message & all customers in the CustomersDatabase & SD R\ref{enum:R1}\\
+\hypertarget{glossary:customerAccounts}{customerAccounts} & phenomenon & the \hyperlink{glossary:CustomerAccount}{customerAccounts database} provides the customerAccounts data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
 \hline
-\hypertarget{glossary:CustomersDatabase}{CustomersDatabase} & lexical domain, designed domain & a database containing \hyperlink{glossary:Customer}{customer} data & CD\\
+customerAccounts & message & all customer accounts in the CustomerAccount database & SD R\ref{enum:R1}\\
+\hline
+\hypertarget{glossary:CustomerAccount}{CustomerAccount} & lexical domain, designed domain & a database containing \hyperlink{glossary:Customer}{customer} accounts & CD\\
+\hline
+CustomerAccount & class & a record representing a Customer account & Class Model\\
+\hline
+customerAccounts & class call name & the database of CustomerAccounts & Class Model\\
 \hline
 CustomerWebBrowser & connection domain & Web browser used by a logged in customer, e.g. Mozilla Firefox. & TCD\\
 \hline
-CustomersDatabase & object & the database of customer acccounts & SD R\ref{enum:R1}\\
+CustomerAccount & object & the database of customer acccounts & SD R\ref{enum:R1}\\
 \hline
 \multicolumn{4}{|l|}{\textbf{D}}\\
 \hline
 \hypertarget{glossary:displayNotification}{displayNotification} & phenomenon & the \hyperlink{glossary:Customer}{customer's} \hyperlink{glossary:Email}{e-mail client} displays a \hyperlink{glossary:notifyCustomer}{notification e-mail} to the \hyperlink{glossary:Customer}{customer} & CD\\
 \hline
-doGet & technical phenomenon & A procedure called by the \hyperlink{https://jakarta.ee/specifications/servlet/}{Jakarta Servlet} container in which the machine can handle an incoming \hyperlink{https://datatracker.ietf.org/doc/html/rfc9112}{HTTP} GET request. (See \hyperlink{glossary:forward}{forward}.) & TCD\\
+dateTimeSpanFromMinutes (in minutes : Integer) & auxiliary function & returns the parameter minutes as unix epoch time & Class Model\\
 \hline
-doPost & technical phenomenon & A procedure called by the \hyperlink{https://jakarta.ee/specifications/servlet/}{Jakarta Servlet} container in which the machine can handle an incoming \hyperlink{https://datatracker.ietf.org/doc/html/rfc9112}{HTTP} POST request. (See \hyperlink{glossary:forward}{forward}.) & TCD\\
+doGet & technical phenomenon & A procedure called by the \href{https://jakarta.ee/specifications/servlet/}{Jakarta Servlet} container in which the machine can handle an incoming \href{https://datatracker.ietf.org/doc/html/rfc9112}{HTTP} GET request. (See \hyperlink{glossary:forward}{forward}.) & TCD\\
+\hline
+doPost & technical phenomenon & A procedure called by the \href{https://jakarta.ee/specifications/servlet/}{Jakarta Servlet} container in which the machine can handle an incoming \href{https://datatracker.ietf.org/doc/html/rfc9112}{HTTP} POST request. (See \hyperlink{glossary:forward}{forward}.) & TCD\\
+\hline
+duration & attribute & the duration of the movie that is to be shown & Class Model\\
 \hline
 \multicolumn{4}{|l|}{\textbf{E}}\\
 \hline
 \hypertarget{glossary:Email}{Email} & causal domain, connection domain & an e-mail service offering to deliver e-mails & CD\\
 \hline
-eMailUnused & guard & the e-mail contained in the registration request is not contained in customers & SD R\ref{enum:R1}\\
+eMailUnused & guard & the e-mail contained in the registration request is not contained in customerAccounts & SD R\ref{enum:R1}\\
 \hline
-executeQuery & technical phenomenon & A procedure the machine can call to query the contents of a \hyperlink{https://www.mysql.com/products/enterprise/techspec.html}{SQL} database. & TCD\\
+executeQuery & technical phenomenon & A procedure the machine can call to query the contents of a \href{https://www.mysql.com/products/enterprise/techspec.html}{SQL} database. & TCD\\
 \hline
-executeUpdate & technical phenomenon & A procedure the machine can call to manipulate a \hyperlink{https://www.mysql.com/products/enterprise/techspec.html}{SQL} database. & TCD\\
+executeUpdate & technical phenomenon & A procedure the machine can call to manipulate a \href{https://www.mysql.com/products/enterprise/techspec.html}{SQL} database. & TCD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{F}}\\
 \hline
-\hypertarget{glossary:forward}{forward} & technical phenomenon & An assortment of procedures and manipulable resources the machine can use to prepare \hyperlink{https://datatracker.ietf.org/doc/html/rfc9112}{HTTP} responses which are then sent by the \hyperlink{https://jakarta.ee/specifications/servlet/}{Jakarta Servlet} container. & TCD\\
+\hypertarget{glossary:forward}{forward} & technical phenomenon & An assortment of procedures and manipulable resources the machine can use to prepare \href{https://datatracker.ietf.org/doc/html/rfc9112}{HTTP} responses which are then sent by the \href{https://jakarta.ee/specifications/servlet/}{Jakarta Servlet} container. & TCD\\
 \hline
 \hypertarget{glossary:forwardNSUBrowse}{forwardNSUBrowse} & phenomenon & \hyperlink{glossary:WebPageNonStaffUserBrowse}{the website} sends a request for a list of upcoming showings to \hyperlink{glossary:UDEK-NonStaffUserBrowse}{the machine} & PD R\ref{enum:R4} / R\ref{enum:R8}\\
+\hline
+forwardNSUBrowse() & method & the machine handles the browse request & Class Model\\
 \hline
 forwardNSUBrowse & message & a request for the machine to send a list of available, i.e., non-archived, showings & SD R4/8\\
 \hline
 \hypertarget{glossary:forwardSubmitBooking}{forwardSubmitBooking} & phenomenon & \hyperlink{glossary:WebpageBookTickets}{the webpage} forwards a request to book tickets to \hyperlink{glossary:UDEKino}{the machine} & PD R\ref{enum:R5}\\
+\hline
+forwardSubmitRegistration() & method & the machine handles the registration request: it creates a new account if possible and sends a status notification to the webpage & Class Model\\
 \hline
 forwardSubmitBooking & message & contains the showing ID and the desired seats & SD R5\\
 \hline
@@ -613,29 +675,37 @@ forwardSubmitRegistration & message & a request from the WebpageRegisterCustomer
 \hline
 \multicolumn{4}{|l|}{\textbf{G}}\\
 \hline
-get\_bookings & message & contains all messages in the BookingsDatabase & SD R5\\
+get\_bookings & message & contains all messages in the Booking database & SD R5\\
 \hline
-get\_customers & message & returns all customer accounts in the CustomersDatabase & SD R\ref{enum:R1}\\
+get\_customerAccounts & message & returns all customer accounts in the CustomerAccount database & SD R\ref{enum:R1}\\
 \hline
-get\_halls & message & returns all halls in the HallsDatabase & SD R5\\
+get\_halls & message & returns all halls in the Hall database & SD R5\\
 \hline
-get\_showings & message & returns all showings in the ShowingsDatabase & SD R5, 4/8, 7\\
+get\_showings & message & returns all showings in the Showing database & SD R5, 4/8, 7\\
 \hline
 gui & technical phenomenon & The web browser renders a webpage. & TCD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{H}}\\
 \hline
-halls & message & all halls in the HallsDatabase & SD R5\\
+\hypertarget{glossary:halls}{halls} & phenomenon & the \hyperlink{glossary:Hall}{halls database} provides the halls data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
 \hline
-\hypertarget{glossary:HallsDatabase}{HallsDatabase} & lexical domain & a database containing the cinema halls, provided by the cinema operator & CD\\
+halls & message & all halls in the Hall database & SD R5\\
 \hline
-HallsDatabase & object & the database containing the cinema halls & SD R5\\
+\hypertarget{glossary:Hall}{Hall} & lexical domain & a database containing the cinema halls, provided by the cinema operator & CD\\
 \hline
-http & technical phenomenon & The \hyperlink{https://datatracker.ietf.org/doc/html/rfc9112}{Hypertext Transfer Protocol}. A client-server protocol for requesting and providing data, like webpages, over the internet. & TCD\\
+Hall & object & the database containing the cinema halls & SD R5\\
+\hline
+hallNumber & attribute & the number of the hall the showing will take place in & Class Model\\
+\hline
+http & technical phenomenon & The \href{https://datatracker.ietf.org/doc/html/rfc9112}{Hypertext Transfer Protocol}. A client-server protocol for requesting and providing data, like webpages, over the internet. & TCD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{I}}\\
 \hline
-&  &  & \\
+id & attribute & the unique id of the showing & Class Model\\
+\hline
+imap & technical phenomenon & \href{https://tools.ietf.org/html/rfc3501}{Internet Message Access Protocol} & TCD\\
+\hline
+isArchived & attribute & indicates whether the showing is archived & Class Model\\
 \hline
 \multicolumn{4}{|l|}{\textbf{J}}\\
 \hline
@@ -646,11 +716,20 @@ http & technical phenomenon & The \hyperlink{https://datatracker.ietf.org/doc/ht
 &  &  & \\
 \hline
 \multicolumn{4}{|l|}{\textbf{L}}\\
+\hline
 &  &  & \\
 \hline
 \multicolumn{4}{|l|}{\textbf{M}}\\
 \hline
-\hypertarget{glossary:modifyShowing}{modifyShowing} & phenomenon & \hyperlink{glossary:UDEKino}{the machine} modifies a showing in the \hyperlink{glossary:ShowingsDatabase}{showings database} & CD\\
+MailClient & connection domain & the Customer's E-Mail client & TCD\\
+\hline
+MailServerCustomer & connection domain & the customer's E-Mail server & TCD\\
+\hline
+MailServerUDEK & connection domain & the system's E-Mail server & TCD\\
+\hline
+minutes & parameter & the minutes to be converted to unix epoch time & Class Model\\
+\hline
+\hypertarget{glossary:modifyShowing}{modifyShowing} & phenomenon & \hyperlink{glossary:UDEKino}{the machine} modifies a showing in the \hyperlink{glossary:Showing}{showings database} & CD\\
 \hline
 \multicolumn{4}{|l|}{\textbf{N}}\\
 \hline
@@ -664,9 +743,13 @@ NonStaffUser & actor & a user who is not logged in as staff and wishes to browse
 \hline
 nsuBrowse & message & a request for the WebpageNonStaffUserBrowse to display available showings & SD R4/8\\
 \hline
+nsuBrowse() & method & the user requests a list of available showings on the webpage & Class Model\\
+\hline
 \hypertarget{glossary:nsuShowings}{nsuShowings} & phenomenon & \hyperlink{glossary:UDEK-NonStaffUserBrowse}{the machine} sends a list of upcoming showings to be displayed by \hyperlink{glossary:WebPageNonStaffUserBrowse}{the website} & PD R\ref{enum:R4} / R\ref{enum:R8}\\
 \hline
 nsuShowings & message & contains available, i.e., non-archived, showings & SD R4/8\\
+\hline
+nsuShowings() & method & the machine sends a set of available showings to the webpage & Class Model\\
 \hline
 \hypertarget{glossary:nsuShowShowings}{nsuShowShowings} & phenomenon & \hyperlink{glossary:WebPageNonStaffUserBrowse}{the website} displays a list of upcoming showings to the \hyperlink{glossary:NonStaffUser}{user} & PD R\ref{enum:R4} / R\ref{enum:R8}\\
 \hline
@@ -678,13 +761,7 @@ nsuShowShowings & message & a rendition of available, i.e., non-archived, showin
 \hline
 \multicolumn{4}{|l|}{\textbf{P}}\\
 \hline
-\hypertarget{glossary:bookings}{bookings} & phenomenon & the \hyperlink{glossary:BookingsDatabase}{bookings database} provides the bookings data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
-\hline
-\hypertarget{glossary:customers}{customers} & phenomenon & the \hyperlink{glossary:CustomersDatabase}{customers database} provides the customers data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
-\hline
-\hypertarget{glossary:halls}{halls} & phenomenon & the \hyperlink{glossary:HallsDatabase}{halls database} provides the halls data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
-\hline
-\hypertarget{glossary:showings}{showings} & phenomenon & the \hyperlink{glossary:ShowingsDatabase}{showings database} provides the showings data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
+pop3 & technical phenomenon & \hyperlink{tools.ietf.org/html/rfc1939}{Post Office Protocol - Version 3} & \\
 \hline
 \multicolumn{4}{|l|}{\textbf{Q}}\\
 \hline
@@ -696,6 +773,8 @@ nsuShowShowings & message & a rendition of available, i.e., non-archived, showin
 \hline
 registrationFailed & message & informs the WebpageRegisterCustomer that account creation has failed & SD R\ref{enum:R1}\\
 \hline
+registrationFailed() & method & the webpage is notified that the registration was successful & Class Model\\
+\hline
 \hypertarget{glossary:registrationFailedNotification}{registrationFailedNotification} & phenomenon & \hyperlink{glossary:WebpageRegisterCustomer}{the webpage} displays a to \hyperlink{glossary:User}{the user} that the registration has failed & PD R\ref{enum:R1}\\
 \hline
 registrationFailedNotification & message & informs the user that account creation has succeeded & SD R\ref{enum:R1}\\
@@ -704,15 +783,19 @@ registrationFailedNotification & message & informs the user that account creatio
 \hline
 registrationSuccess & message & informs the WebpageRegisterCustomer that account registration has succeeded & SD R\ref{enum:R1}\\
 \hline
+registrationSuccess() & method & the webpage is notified that the registration was unsuccessful & Class Model\\
+\hline
 \hypertarget{glossary:registrationSuccessNotification}{registrationSuccessNotification} & phenomenon & \hyperlink{glossary:WebpageRegisterCustomer}{the webpage} displays a notification to \hyperlink{glossary:User}{the user} that the registration has succeeded & PD R\ref{enum:R1}\\
 \hline
 registrationSuccessNotification & message & informs the User that account creation has succeeded & SD R\ref{enum:R1}\\
 \hline
-\hypertarget{glossary:removeBooking}{removeBooking} & phenomenon &  \hyperlink{glossary:UDEKino}{the machine} removes a booking from the \hyperlink{glossary:BookingsDatabase}{bookings database} & CD\\
+\hypertarget{glossary:removeBooking}{removeBooking} & phenomenon &  \hyperlink{glossary:UDEKino}{the machine} removes a booking from the \hyperlink{glossary:Booking}{bookings database} & CD\\
 \hline
-\hypertarget{glossary:removeBooking}{removeCustomer} & phenomenon &  \hyperlink{glossary:UDEKino}{the machine} removes a \hyperlink{glossary:Customer}{customer} from the \hyperlink{glossary:CustomersDatabase}{customers database} & CD\\
+\hypertarget{glossary:removeBooking}{removeCustomer} & phenomenon &  \hyperlink{glossary:UDEKino}{the machine} removes a \hyperlink{glossary:Customer}{customer} from the \hyperlink{glossary:CustomerAccount}{customers database} & CD\\
 \hline
-\hypertarget{glossary:Showing}{removeShowing} & phenomenon &  \hyperlink{glossary:UDEKino}{the machine} removes a showing from the \hyperlink{glossary:ShowingsDatabase}{showings database} & CD\\
+\hypertarget{glossary:removeShowing}{removeShowing} & phenomenon &  \hyperlink{glossary:UDEKino}{the machine} removes a showing from the \hyperlink{glossary:Showing}{showings database} & CD\\
+\hline
+result & parameter & the set of available showings & Class Model\\
 \hline
 \multicolumn{4}{|l|}{\textbf{S}}\\
 \hline
@@ -720,25 +803,36 @@ registrationSuccessNotification & message & informs the User that account creati
 \hline
 \hypertarget{glossary:sCancelShowing}{sCancelShowing} & phenomenon & a \hyperlink{glossary:StaffMember}{staff member} attempts to cancel a showing & CD\\
 \hline
+send & technical phenomenon & the machine sends an e-mail & TCD\\
+\hline
 setArchived & message & contains the ID of the showing which is to be marked as archived & SD R7\\
+\hline
+\hypertarget{glossary:Showing}{Showing} & lexical domain, designed domain & a database containing the cinema showings & CD\\
+\hline
+Showing & object & the database containing the showings & SD R5, 4/8, 7\\
+\hline
+Showing & class & a record representing a showing & Class Model\\
 \hline
 ShowingHasStarted & guard / state predicate & whether the showing in question has already started, i.e., its starting date and time lies in the past & SD R7\\
 \hline
 ShowingIsArchived & guard / state predicate & whether the showing in question is marked as archived" & SD R7\\
 \hline
-showings & message & contains all showings in the ShowingsDatabase & SD R5, 4/8, 7\\
+\hypertarget{glossary:showings}{showings} & phenomenon & the \hyperlink{glossary:Showing}{showings database} provides the showings data to the \hyperlink{glossary:UDEKino}{machine} & CD\\
 \hline
-\hypertarget{glossary:ShowingsDatabase}{ShowingsDatabase} & lexical domain, designed domain & a database containing the cinema showings & CD\\
+showings & message & contains all showings in the Showing database & SD R5, 4/8, 7\\
 \hline
-ShowingsDatabase & object & the database containing the showings & SD R5, 4/8, 7\\
-\hline
+showings & class call name & the database of Showings & Class Model\\
 \hypertarget{glossary:sLogin}{sLogin} & phenomenon & a \hyperlink{glossary:User}{user} attempts to log in as a \hyperlink{glossary:StaffMember}{staff member} & CD\\
 \hline
 \hypertarget{glossary:sLogout}{sLogout} & phenomenon & a \hyperlink{glossary:StaffMember}{staff member} attempts to log out & CD\\
 \hline
+SMTP & technical phenomenon & \href{http://tools.ietf.org/html/rfc2821}{Simple Mail Transfer Protocol} & TCD\\
+\hline
 \hypertarget{glossary:sShowWebsite}{sShowWebsite} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} shows a website to the \hyperlink{glossary:StaffMember}{staff member} & CD\\
 \hline
 \hypertarget{glossary:StaffMember}{StaffMember} & biddable domain & a member of cinema staff; a \hyperlink{glossary:User}{user} who has logged in as staff & CD\\
+\hline
+startDateTime & attribute & the date and time the showing will start at in unix epoch time & Class Model\\
 \hline
 \hypertarget{glossary:submitBooking}{submitBooking} & phenomenon & the \hyperlink{glossary:Customer}{customer} selects the tickets they wish to book and hits the submit button &  PD R\ref{enum:R5}\\
 \hline
@@ -746,8 +840,9 @@ submitBookign & message & contains the showing ID and desired seats & SD R5\\
 \hline
 \hypertarget{glossary:submitRegistration}{submitRegistration} & phenomenon & the \hyperlink{glossary:User}{user} submits a request to register a new \hyperlink{glossary:Customer}{customer} account, containing an e-mail address and a password & PD R\ref{enum:R1}\\
 \hline
-\hline
 submitRegistration & message & a request from the user to register a new customer account, containing an e-mail address and a password & SD R\ref{enum:R1}\\
+\hline
+submitRegistration(in email : String, in password : String) & method & the method with which the user submits the registration form & Class Model\\
 \hline
 \hypertarget{glossary:submitShowing}{submitShowing} & phenomenon & a \hyperlink{glossary:StaffMember}{staff member} submits a new showing to the machine for entry into the database & CD\\
 \hline
@@ -771,9 +866,17 @@ UDEK\_BookTickets & object & the machine responsible for the booking of tickets 
 \hline
 \hypertarget{glossary:UDEK-NonStaffUserBrowse}{UDEK\_NonStaffUserBrowse} & machine & the sub-\hyperlink{glossary:UDEKino}{machine} responsible for \hyperlink{glossary:NonStaffUser}{registered and non-registered} customers browsing upcoming showings & PD R\ref{enum:R4} / R\ref{enum:R8}\\
 \hline
+UDEK\_NonStaffUserBrowse & class & the machine class & Class Model\\
+\hline
+udek\_NonStaffUserBrowse & class call name & the instance of the machine class the webpage belongs to & Class Model\\
+\hline
 \hypertarget{glossary:UDEK-RegisterCustomer}{UDEK\_RegisterCustomer} & machine & the sub-\hyperlink{glossary:UDEKino}{machine} responsible for \hyperlink{glossary:Customer}{customer} account registration & PD R\ref{enum:R1}\\
 \hline
 UDEK\_RegisterCustomer & object & the machine responsible for customer account registration & SD R\ref{enum:R1}\\
+\hline
+UDEK\_RegisterCustomer & class & the machine class & Class Model\\
+\hline
+udek\_registerCustomer & class call name & the instance of the machine class the webpage belongs to & Class Model\\
 \hline
 \hypertarget{glossary:User}{User} & biddable domain & a user of the \hyperlink{glossary:UDEKino}{application} who is not logged in & CD, TCD\\
 \hline
@@ -797,9 +900,17 @@ WebpageBookTickets & object & the webpage for booking tickets & SD R5\\
 \hline
 WebpageNonStaffUserBrowse & object & the webpage for NonStaffUsers to browse available showings & SD R4/8\\
 \hline
+WebpageNonStaffUserBrowse & class & the class representing the webpage for browsing showings & Class Model\\
+\hline
+webpageNonStaffUserBrowse & class call name & the webpage instance whose request is currently being handled & Class Model\\
+\hline
 \hypertarget{glossary:WebpageRegisterCustomer}{WebpageRegisterCustomer} & connection domain, designed domain & a webpage via which a \hyperlink{glossary:User}{user} can register a new \hyperlink{glossary:Customer}{customer account} & PD R\ref{enum:R1}\\
 \hline
 WebpageRegisterCustomer & object & the webpage for registering a new customer account & SD R\ref{enum:R1}\\
+\hline
+WebpageRegisterCustomer & class & the class of the webpage for customer registration & Class Model\\
+\hline
+webpageRegisterCustomer & class call name & the instance of the registration webpage class whose request is currently being handled & Class Model\\
 \hline
 \multicolumn{4}{|l|}{\textbf{X}}\\
 \hline
