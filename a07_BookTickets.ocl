@@ -1,0 +1,30 @@
+context UDEK_BookTickets::forwardSubmitBooking(showingID : Integer, row : Integer, column : Integer)
+pre: true
+post:
+    let BookingExists : Boolean =
+        bookings->one(
+            b : Booking
+                | b.showingID = showingID
+                    and b.customer = session.customer
+                    and b.row = row
+                    and b.column = column
+        )
+    in let bookingIsValid : Boolean =
+        1 <= row and 1 <= column
+        and showings->one(
+            s : Showing
+                | s.showingID = showingID
+                    and s.row <= s.rows
+                    and s.column <= s.columns
+        ) and not bookings@pre->exists(
+            b : Booking
+                | b.showingID = showingID
+                    and b.row = row
+                    and b.column = column
+        )
+    in let BookingsSizeCheck : Boolean = 
+        bookings->size() = bookings@pre->size() + 1
+    in
+        if bookingIsValid
+        then BookingExists and BookingsSizeCheck and webpageBookTickets^bookingSuccess()
+        else webpageBookTickets^bookingFailed()

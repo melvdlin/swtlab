@@ -1,0 +1,7 @@
+context UDEK_ArchiveShowings::checkStarted()
+pre: true
+post:
+    showings->forAll(
+        s : Showing
+            | s.isArchived = s.startDateTime > api.currentDateTime() - api.dateTimeSpanFromMinutes(15)
+    )

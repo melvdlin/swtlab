@@ -14,7 +14,9 @@ post:
             c : CustomerAccount
                 | c.email = email and c.password = password
         )
+    in let CustomerAccountsSizeCheck : Boolean =
+        costomerAccounts->size() = customerAccounts@pre->size() + 1
     in
         if eMailUnused
-        then CustomerAccountExists and webpageRegisterCustomer^registrationSuccess()
+        then CustomerAccountExists and  webpageRegisterCustomer^registrationSuccess()
         else webpageRegisterCustomer^registrationFailed()
