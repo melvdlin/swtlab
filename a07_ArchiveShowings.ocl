@@ -3,5 +3,5 @@ pre: true
 post:
     showings->forAll(
         s : Showing
-            | s.isArchived = s.startDateTime > api.currentDateTime() - api.dateTimeSpanFromMinutes(15)
+            | s.isArchived = s.startDateTime < api.currentDateTime()
     )

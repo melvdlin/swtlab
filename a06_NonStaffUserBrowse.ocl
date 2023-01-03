@@ -3,7 +3,7 @@ inv:
     showings->isUnique(id)
     and showings->forAll(
         s : Showing
-            | s.isArchived = s.startDateTime > api.currentDateTime() - api.dateTimeSpanFromMinutes(15))
+            | s.isArchived = s.startDateTime < api.currentDateTime())
 
 context UDEK_NonStaffUserBrowse::forwardNSUBrowse()
 pre: true

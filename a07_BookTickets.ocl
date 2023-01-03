@@ -1,29 +1,47 @@
-context UDEK_BookTickets::forwardSubmitBooking(showingID : Integer, row : Integer, column : Integer)
+context UDEK_NonStaffUserBrowse
+inv:
+    showings->isUnique(id)
+    and showings->forAll(
+        s : Showing
+            | s.isArchived = s.startDateTime < api.currentDateTime())
+
+context UDEK_BookTickets::forwardSubmitBooking(showingID : Integer, seats : Set(Tuple(row : Integer, column : Integer)))
 pre: true
 post:
     let BookingExists : Boolean =
-        bookings->one(
-            b : Booking
-                | b.showingID = showingID
-                    and b.customer = session.customer
-                    and b.row = row
-                    and b.column = column
+        seats->forAll(
+            s : Tuple(row : Integer, column : Integer)
+                | bookings->one(
+                    b : Booking
+                        | b.showingID = showingID
+                            and b.customer = session.customer
+                            and b.row = s.row
+                            and b.column = s.column
+                )
         )
     in let bookingIsValid : Boolean =
-        1 <= row and 1 <= column
-        and showings->one(
-            s : Showing
-                | s.showingID = showingID
-                    and s.row <= s.rows
-                    and s.column <= s.columns
-        ) and not bookings@pre->exists(
-            b : Booking
-                | b.showingID = showingID
-                    and b.row = row
-                    and b.column = column
+        seats->forAll(
+            seat : Tuple(row : Integer, column : Integer)
+                | 1 <= row and 1 <= column
+                    and showings->one(
+                        showing : Showing
+                            | showing.showingID = showingID
+                                and showing.startDateTime >= api.currentDateTime() + api.dateTimeFromMinutes(15)
+                                and halls->one(
+                                    hall : Hall
+                                        | hall.hallNumber = showing.hallNumber
+                                            and seat.row <= hall.rows
+                                            and seat.column <= hall.columns
+                                )
+                    ) and not bookings@pre->exists(
+                        booking : Booking
+                            | booking.showingID = showingID
+                                and booking.row = seat.row
+                                and booking.column = seat.column
+                    )
         )
     in let BookingsSizeCheck : Boolean = 
-        bookings->size() = bookings@pre->size() + 1
+        bookings->size() = bookings@pre->size() + seats->size()
     in
         if bookingIsValid
         then BookingExists and BookingsSizeCheck and webpageBookTickets^bookingSuccess()
