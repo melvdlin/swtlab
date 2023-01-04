@@ -1,0 +1,34 @@
+Booking & class & a record representing a booking of a seat for a showing & Class Model\\
+bookings & class call name & the database of bookings & Class Model\\
+bookingFailed() & method & displays a notification to the customer that the booking failed & Class Model\\
+bookingSuccess() & method & displays a notification to the customer that the booking succeeded & Class Model\\
+column & attribute & the column of the booked seat & Class Model\\
+column & parameter & the column of the seat that is to be booked & Class Model\\
+columns & attribute & the number of columns of seats the cinema hall contains & Class Model\\
+customer & attribute & the e-mail address of the customer who made the booking & Class Model\\
+customer & attribute & the e-mail of the session's customer & Class Model\\
+CustomerSession & class & an auxiliary class containing auxiliary functions and data of a logged in Customer's session & Class Model\\
+forwardSubmitBooking & method & tries to book the given seat for the given showing and informs the webpage of the success or failure afterwards & Class Model\\
+Hall & class & a record representing a cinema hall & Class Model\\hallNumber & attribute & the number of the cinema hall & Class Model\\
+hallNumber & attribute & the number of the cinema hall & Class Model\\
+halls & class call name & the database of cinema halls & Class Model\\
+id & attribute & the unique ID of the booking & Class Model\\
+row & attribute & the row of the booked seat & Class Model\\
+row & parameter & the row of the seat that is to be booked & Class Model\\
+rows & attribute & the number of rows of seats the cinema hall contains & Class Model\\
+session & class call name & the request's session & Class Model\\
+showingID & attribute & the ID of the showing of the booking & Class Model\\
+showingID & parameter & the ID of the showing that is to be booked & Class Model\\
+submitBooking(in showingID : Integer, in row : Integer, in column : Integer) & method & forwards the booking request to the machine & Class Model\\
+UDEK\_BookTickets & class & the machine class & Class Model\\
+udek\_bookTickets & class call name & the machine class intance & Class Model\\
+WebpageBookTickets & class & the class of the webpage for the booking of tickets & Class Model\\
+webpageBookTickets & class call name & the webpage via which the request was sent & Class Model\\
+
+checkStarted() & methods & archives all showings that start in 15 minutes or less (or already have started) & Class Model\\
+UDEK\_ArchiveShowings & class & the machine class & Class Model\\
+
+LC\_{User} & life-cycle & Life-cycle for one user & LC\\
+LC\_{Customer} & life-cycle & Life-cycle for one logged in customer & LC\\
+LC\_{NonStaffUser} & life-cycle & Life-cycle for one user who is not logged in as staff & LC\\
+LC\_{UDEKino} & life-cycle & Combined life-cycle (all users, customers and internal operations) & LC\\

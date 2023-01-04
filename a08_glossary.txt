@@ -1,0 +1,217 @@
+\hline
+addCustomerAccount & phenomenon & creates a CustomerAccount with the provided email and password and adds it to the database & internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+\hline
+addBooking & phenomenon & creates a Booking for the customer/showing with the provided email/ID for the provided seat and adds it to the database & internal interfaces / port types and interface relations BookTickets; app_if\\
+\hline
+archive & phenomenon & sets the showing with the provided ID to archived & internal interfaces ArchiveShowings; app_if\\
+
+
+\hline
+BookingAdapter & component & the Booking database adapter & CSD BookTickets\\
+\hline
+BookingAdapterPort & port & the port connecting the Booking SQL database to its adapter & CSD / port types and interface relations BookTickets\\
+\hline
+BookingPort & port & the port via which the Booking database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets\\
+\hline
+BookingPort_I & port & the port via which the machine reads and manipulates the Booking database & CSD / port types and interface relations BookTickets; app_if\\
+\hline
+bookings & phenomenon & the cinema Bookings & port types and interface relations BookTickets\\
+\hline
+B!{Bookings} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+
+
+\hline
+CA_Adapter & component & the CustomerAccount database adapter & CSD RegisterCustomer\\
+\hline
+CA_AdapterPort & port & the port connecting the CustomerAccount SQL database to its adapter & CSD / port types and interface relations RegisterCustomer\\
+\hline
+CAPort & port & the port via which the CustomerAccount database may be read and manipulated & CSD / internal interfaces / port types and interface relations RegisterCustomer\\
+\hline
+CAPort_I & port & the port via which the machine reads and manipulates the CustomerAccount database & CSD / internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+\hline
+customerAccounts & phenomenon & the customer accounts & internal interfaces / port types and interface relations RegisterCustomer\\
+\hline
+CA!{customerAccounts} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
+\hline
+currentDateTime & phenomenon & returns the milliseconds elapsed since the unix epoch & internal interfaces / port types and interface relations BookTickets / ArchiveShowings; app_if\\
+\hline
+currentTimeMillis & phenomenon & returns the milliseconds elapsed since the unix epoch & internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
+\hline
+CustomerGUI & component & the Customer's gui component & CSD BookTickets\\
+\hline
+CustomerPort & port & the port to which the servlet container sends requests & CSD / port types and interface relations BookTickets\\
+\hline
+CustomerReqs & provided interface & an interface to send Customer requests to & CSD / internal interfaces / port types and interface relations BookTickets; app_if\\
+\hline
+CustomerReqsPort & port & the machine port to which Customer requests are sent & CSD / internal interfaces / port types and interface relations BookTickets; app_if\\
+\hline
+CustomerReqsPort_I & port & the port to which the CustomerGUI sends Customer requests & CSD / port types and interface relations BookTickets\\
+\hline
+checkStarted & phenomenon & phenomenon & archives all Showings which have already started & internal interfaces ArchiveShowings; app_if\\
+
+
+\hline
+doGet & phenomenon & has the servlet handle the HTTP GET request & port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+doPost & phenomenon & has the servlet handle the HTTP POST request & port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+dateTimeSpanFromMinutes & phenomenon & returns the provided minutes converted to milliseconds & internal interfaces BookTickets; app_if\\
+
+
+\hline
+executeQuery & phenomenon & executes an SQL query & port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+executeUpdate & phenomenon & executes an SQL update & port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
+
+
+\hline
+forwardSubmitRegistration & phenomenon & forwards a registration request to the responsible component, returns registrationSuccess or registration Failed depending on whether the registration succeeded or failed & internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+\hline
+forwardSubmitBooking & phenomenon & forwards a booking request to the responsible component, returns bookingSuccess or booking Failed depending on whether the booking succeeded or failed & internal interfaces / port types and interface relations BookTickets; app_if\\
+\hline
+forwardNSUBrowse & phenomenon & forwards a browse request to the responsible component, returns all currently available showings & internal interfaces / port types and interface relations NSUBrowse; app_if\\
+
+
+\hline
+getCustomerAccount & phenomenon & returns the CustomerAccount with the given email, if it exists & internal interfaces RegisterCustomer; app_if\\
+\hline
+getHall & phenomenon & returns the Hall with the given hallNumber, if it exists & internal interfaces BookTickets; app_if\\
+\hline
+getShowing & phenomenon & returns the Showing with the given ID, if it exists & internal interfaces BookTickets; app_if\\
+\hline
+getShowings & phenomenon & returns all Showings & internal interfaces Browse / ArchiveShowings; app_if\\
+\hline
+getBooking & phenomenon & returns the Booking for the given showing and seat, if it exists & internal interfaces BookTickets; app_if\\
+
+
+\hline
+HallAdapter & component & the Hall database adapter & CSD BookTickets\\
+\hline
+HallAdapterPort & port & the port connecting the Hall SQL database to its adapter & CSD / port types and interface relations BookTickets\\
+\hline
+HallPort & port & the port via which the Hall database may be read & CSD / internal interfaces / port types and interface relations BookTickets\\
+\hline
+HallPort_I & port & the port via which the machine reads the Hall database & CSD / port types and interface relations BookTickets; app_if\\
+\hline
+halls & phenomenon & the cinema halls & port types and interface relations BookTickets\\
+\hline
+H!{halls} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+
+
+\hline
+ICustomerAccount & provided interface & an interface via which the CustomerAccount database may be read and manipulated & CSD / internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+\hline
+IHall & provided interface & an interface via which the Hall database may be read & CSD / internal interfaces / port types and interface relations BookTickets; app_if\\
+\hline
+IBooking & provided interface & an interface via which the Booking database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets; app_if\\
+\hline
+IShowing & provided interface & an interface via which the Showing database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets / Browse / ArchiveShowings; app_if\\
+\hline
+ITime & provided interface & an interface for providing time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings; app_if\\
+\hline
+ITimed & provided interface & an interface for triggering timed internal actions & CSD / internal interfaces / port types and interface relations ArchiveShowings; app_if\\
+
+
+\hline
+modifyShowing & phenomenon & modifies a showing & port tyypes and interface relations ArchiveShowings\\
+
+
+\hline
+jakarta.servlet.http.Servlet & provided interface & provides handling of HTTP requests & CSD / port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+jakarta.servlet.RequestDispatcher & required interface & a interface to which HTTP requests may be forwarded & / port types and interface relations CSD RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+java.sql.Statement & required interface & an interface for executing SQL statements & CSD / port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+java.lang.System & required interface & an interface for executing SQL statements & CSD / port types and interface relations BookTickets / ArchiveShowings\\
+
+
+\hline
+NonStaffUserGUI & component & the NonStaffUser's gui component & CSD RegisterCustomer\\
+\hline
+NSUPort & port & the port to which the servlet container sends requests & CSD / port types and interface relations RegisterCustomer\\
+\hline
+NSUReqs & provided interface & an interface to send NonStaffUser requests to & CSD / internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+\hline
+NSUReqsPort & port & the machine port to which NonStaffUser requests are sent & CSD / internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+\hline
+NSUReqsPort_I & port & the port to which the NonStaffUserGUI sends NonStaffUser requests & CSD / port types and interface relations RegisterCustomer\\
+\hline
+
+
+\hline
+registrationSuccess & phenomenon & informs the webpage that the registration succeded & port types and interface relations RegisterCustomer\\
+\hline
+registrationFailed & phenomenon & informs the webpage that the registration failed & port types and interface relations RegisterCustomer\\
+
+
+\hline
+ShowingAdapter & component & the Showing database adapter & CSD BookTickets / NUSBrowse / ArchiveShowings\\
+\hline
+ShowingAdapterPort & port & the port connecting the Showing SQL database to its adapter & CSD / port types and interface relations BookTickets / NUSBrowse / ArchiveShowings\\
+\hline
+ShowingPort & port & the port via which the Showing database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets / NUSBrowse / ArchiveShowings\\
+\hline
+ShowingPort_I & port & the port via which the machine reads and manipulates the Showing database & CSD / port types and interface relations BookTickets / NUSBrowse / ArchiveShowings; app_if\\
+\hline
+showings & phenomenon & the cinema Showings & port types and interface relations BookTickets / NUSBrowse / ArchiveShowings\\
+\hline
+S!{showings} & interface & interface from the problem diagram & port types and interface relations BookTickets / NUSBrowse / ArchiveShowings\\
+
+
+\hline
+TimeAdapter & component & an adapter providing time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
+\hline
+TimeAdapterPort & port & the port providing system time to the time adapter & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
+\hline
+TimeAdapterPort_I & port & the port consuming system time & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
+\hline
+TimePort & port & the port providing time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
+\hline
+TimePort_I & port & the port consuming time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings; app_if\\
+\hline
+Timer & component & a timer triggering certain actions in certain intervals & CSD ArchiveShowings\\
+\hline
+TimedPort & the machine port for triggering timed internal actions & CSD / internal interfaces ArchiveShowings; app_if\\
+\hline
+TimedPort_I & the port which triggers timed internal actions & CSD / internal interfaces ArchiveShowings\\
+
+
+\hline
+UDEK_Application & component & the application component & CSD RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+UDEK_RegisterCustomer & machine & the machine component & CSD RegisterCustomer\\
+\hline
+UDEK_BooKTickets & machine & the machine component & CSD BookTickets\\
+\hline
+UDEK_NonStaffUserBrowse & machine & the machine component & CSD NonStaffUserBrowse\\
+\hline
+UserGUI & component & the User's gui component & CSD RegisterCustomer\\
+\hline
+UserPort & port & the port to which the servlet container sends requests & CSD / port types and interface relations RegisterCustomer\\
+\hline
+UserReqs & provided interface & an interface to send user requests to & CSD / internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+\hline
+UserReqsPort & port & the machine port to which user requests are sent & CSD / internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+\hline
+UserReqsPort_I & port & the port to which the UserGUI sends user requests & CSD / port types and interface relations RegisterCustomer\\
+\hline
+UDEK_RC!{registrationSuccess, registrationFailed} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
+\hline
+UDEK_RC!{addCustomerAccount} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
+\hline
+UDEK_BT!{bookingSuccess, bookingFailed} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+\hline
+UDEK_BT!{addBooking} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+\hline
+UDEK_NSUB!{nsuShowings} & interface & interface from the problem diagram & port types and interface relations NSUBrowse\\
+\hline
+UDEK_AS!{modifyShowing} & interface & interface from the problem diagram & port types and interface relations ArchiveShowings\\
+
+
+\hline
+WPRC!{forwardSubmitRegistration} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
+\hline
+WPBT!{forwardSubmitBooking} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+\hline
+WPNSUB!{forwardNSUBrowse} & interface from the problem diagram & port types and interface relations NSUBrowse\\

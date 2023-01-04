@@ -1,0 +1,36 @@
+CustomerAccount & class & a record representing a Customer account & Class Model\\
+customerAccounts & class call name & the database of CustomerAccounts & Class Model\\
+email & attribute & the E-Mail address of the CustomerAccount & Class Model\\
+email & parameter & the E-Mail address of the new CustomerAccount & Class Model\\
+forwardSubmitRegistration() & method & the machine handles the registration request: it creates a new account if possible and sends a status notification to the webpage & Class Model\\
+password & attribute & the password of the CustomerAccount & Class Model\\
+password & parameter & the password of the new CustomerAccount & Class Model\\
+registrationFailed() & method & the webpage is notified that the registration was successful & Class Model\\
+registrationSuccess() & method & the webpage is notified that the registration was unsuccessful & Class Model\\
+submitRegistration(in email : String, in password : String) & method & the method with which the user submits the registration form & Class Model\\
+UDEK_RegisterCustomer & class & the machine class & Class Model\\
+udek_registerCustomer & class call name & the instance of the machine class the webpage belongs to & Class Model\\
+WebpageRegisterCustomer & class & the class of the webpage for customer registration & Class Model\\
+webpageRegisterCustomer & class call name & the instance of the registration webpage class whose request is currently being handled & Class Model\\
+
+APIProvided & class & a class containing various auxiliary functions provided by the runtime environment & Class Model\\
+api & class call name & an instance of the APIProvided class & Class Model\\
+currentDateTime() & auxiliary function & returns the current time in unix epoch time & Class Model\\
+dateTimeSpanFromMinutes(in minutes : Integer) & auxiliary function & returns the parameter minutes as unix epoch time & Class Model\\
+duration & attribute & the duration of the movie that is to be shown & Class Model\\
+forwardNSUBrowse() & method & the machine handles the browse request & Class Model\\
+hallNumber & attribute & the number of the hall the showing will take place in & Class Model\\
+id & attribute & the unique id of the showing & Class Model\\
+isArchived & attribute & indicates whether the showing is archived & Class Model\\
+minutes & parameter & the minutes to be converted to unix epoch time & Class Model\\
+nsuBrowse() & method & the user requests a list of available showings on the webpage & Class Model\\
+nsuShowings() & method & the machine sends a set of available showings to the webpage & Class Model\\
+result & parameter & the set of available showings & Class Model\\
+Showing & class & a record representing a showing & Class Model\\
+showings & class call name & the database of Showings & Class Model\\
+startDateTime & attribute & the date and time the showing will start at in unix epoch time & Class Model\\
+title & attribute & the title of the movie that is to be shown & Class Model\\
+UDEK_NonStaffUserBrowse & class & the machine class & Class Model\\
+udek_NonStaffUserBrowse & class call name & the instance of the machine class the webpage belongs to & Class Model\\
+WebpageNonStaffUserBrowse & class & the class representing the webpage for browsing showings & Class Model\\
+webpageNonStaffUserBrowse & class call name & the webpage instance whose request is currently being handled & Class Model\\
