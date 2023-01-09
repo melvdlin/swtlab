@@ -488,6 +488,142 @@ $LC_{UDEKino}=(||_{i=1}^{n}LC_{User_i})||(||_{j=1}^{m}LC_{Customer_j})||(||_{k=1
 
 \section{D1}
 
+\subsection{NonStaffUserBrowse}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = \textwidth]{figures/08/A08_Browse-Composite Structure.drawio.pdf}
+    \caption{Composite structure of NonStaffUserBrowse}
+    \label{figure:NonStaffUserBrowse_composite_structure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{figures/08/A08_Browse-Internal Interfaces.drawio.pdf}
+\caption{Internal interfaces of NonStaffUserBrowse}
+\label{figure:NonStaffUserBrowse_internal_interfaces}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = \textwidth]{figures/08/A08_Browse-Port Types.drawio.pdf}
+    \caption{Port types and interface relations of NonStaffUserBrowse}
+    \label{figure:NonStaffUserBrowse_port_types}
+\end{figure}
+
+\subsection{BookTickets}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{figures/08/A08_BookTickets-Composite Structure.drawio.pdf}
+\caption{Composite structure of BookTickets}
+\label{figure:BookTickets_composite_structure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{figures/08/A08_BookTickets-Internal Interfaces.drawio.pdf}
+\caption{Internal interfaces of BookTickets}
+\label{figure:BookTickets_internal_interfaces}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{figures/08/A08_BookTickets-Port Types.drawio.pdf}
+\caption{Port types and interface relations of BookTickets}
+\label{figure:BookTickets_port_types}
+\end{figure}
+
+\subsection{RegisterCustomer}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{figures/08/A08_RegisterCustomer-Composite Structure.drawio.pdf}
+\caption{Composite structure of RegisterCustomer}
+\label{figure:RegisterCustomer_composite_structure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{figures/08/A08_RegisterCustomer-Internal Interfaces.drawio.pdf}
+\caption{Internal interfaces of RegisterCustomer}
+\label{figure:RegisterCustomer_internal_interfaces}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{figures/08/A08_RegisterCustomer-Port Types.drawio.pdf}
+\caption{Port types and interface relations of RegisterCustomer}
+\label{figure:RegisterCustomer_port_types}
+\end{figure}
+
+\subsection{ArchiveShowings}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{figures/08/A08_Archive-Composite Structure.drawio.pdf}
+\caption{Composite structure of ArchiveShowings}
+\label{figure:ArchiveShowings_composite_structure}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{figures/08/A08_Archive-Internal Interfaces.drawio.pdf}
+\caption{Internal interfaces of ArchiveShowings}
+\label{figure:ArchiveShowings_internal_interfaces}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width = \textwidth]{figures/08/A08_Archive-Port Types.drawio.pdf}
+\caption{Port types and interface relations of ArchiveShowings}
+\label{figure:ArchiveShowings_port_types}
+\end{figure}
+
+\subsection*{app\_if}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = \textwidth]{figures/08/A08_app_if.pdf}
+    \caption{Port types and interface relations of ArchiveShowings}
+    \label{figure:app_if}
+\end{figure}
+
+\subsection*{adapter\_if'}
+
+There are no HAL components in the subproblem architectures. Hence, there are no \textbf{adapter\_if'} interface classes that need to be refined.
+
+\subsection*{tech\_if''}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|p{0.5\linewidth}|p{0.5\linewidth}|}
+        \hline
+        \textbf{Considered interface in subproblem architecture} & \textbf{technical interface} \\\hline\hline
+        \textless\textless api\textgreater\textgreater\ jakarta.servlet.http.HttpServlet in UDEK\_NonStaffUserBrowse, UDEK\_BookTickets, UDEK\_RegisterCustomer
+        & \textless\textless api, call\_return\textgreater\textgreater\ AT!\{doGet, doPost\}
+        \\\hline
+        \textless\textless api\textgreater\textgreater\ jakarta.servlet.RequestDispatcher in UDEK\_NonStaffUserBrowse, UDEK\_BookTickets, UDEK\_RegisterCustomer
+        & \textless\textless api, call\_return\textgreater\textgreater\ UDEK!\{forward\}
+        \\\hline
+        \textless\textless api\textgreater\textgreater\ java.sql.Statement in UDEK\_NonStaffUserBrowse, UDEK\_BookTickets, UDEK\_RegisterCustomer, UDEK\_ArchiveShowings
+        & \textless\textless api, call\_return\textgreater\textgreater\ AT!\{executeQuery, executeUpdate\}
+        \\\hline
+        \textless\textless api\textgreater\textgreater\ java.lang.System in UDEK\_NonStaffUserBrowse, UDEK\_BookTickets, UDEK\_ArchiveShowings
+        & omitted in the technical context diagram
+        \\\hline
+    \end{tabular}
+    \caption{tech\_if'' by TCD}
+    \label{tab:tech_if}
+\end{table}
+
+\subsection{Global Architecture}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = \textwidth]{figures/08/A08_global_architecture.pdf}
+    \caption{Global architecture}
+    \label{figure:global_architecture}
+\end{figure}
+
 \section{D2}
 
 \section{D3}
@@ -502,6 +638,7 @@ State diagrams with tikZ:
 \tikzstyle{state} = [rectangle, rounded corners, minimum width=2cm, minimum height=1cm, text centered, draw=black]
 \tikzstyle{decision} = [diamond, minimum width=0.5cm, minimum height=0.5cm, text centered, draw=black]
 \tikzstyle{arrow} = [->,>=stealth]
+
 \tikzstyle{every node} = [font=\tiny]
 
 %--------------
@@ -560,7 +697,7 @@ State diagrams with tikZ:
 %-------------------------
 \chapter{Glossary}
 
-\begin{longtable}{|p{4cm}|p{3cm}|p{5cm}|l|}
+\begin{longtable}{|p{.4\linewidth}|p{.2\linewidth}|p{.2\linewidth}|p{.2\linewidth}|}
 \caption{Glossary}
 \label{table:glossar}\\
 \hline
@@ -590,6 +727,12 @@ APIProvided & class & a class containing various auxiliary functions provided by
 api & class call name & an instance of the APIProvided class & Class Model\\
 \hline
 ApacheTomcat & connection domain & An Open Source JSP and Servlet Container from the Apache Foundation. & TCD\\
+\hline
+addCustomerAccount & phenomenon & creates a CustomerAccount with the provided email and password and adds it to the database & internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
+\hline
+addBooking & phenomenon & creates a Booking for the customer/showing with the provided email/ID for the provided seat and adds it to the database & internal interfaces / port types and interface relations BookTickets; app\_if\\
+\hline
+archive & phenomenon & sets the showing with the provided ID to archived & internal interfaces ArchiveShowings; app\_if\\
 \hline
 %-------------------------
 %-------------------------
@@ -639,6 +782,46 @@ bookingSuccess() & method & displays a notification to the customer that the boo
 bookingSuccessNotification & message & informs the Customer that the booking was successful & SD R5\\
 \hline
 \hypertarget{glossary:bookTickets}{bookTickets} & phenomenon & a \hyperlink{glossary:Customer}{customer} books tickets for a showing & CD\\
+\hline
+BookingAdapter & component & the Booking database adapter & CSD BookTickets\\
+\hline
+BookingAdapterPort & port & the port connecting the Booking SQL database to its adapter & CSD / port types and interface relations BookTickets\\
+\hline
+BookingPort & port & the port via which the Booking database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets\\
+\hline
+BookingPort\_I & port & the port via which the machine reads and manipulates the Booking database & CSD / port types and interface relations BookTickets; app\_if\\
+\hline
+bookings & phenomenon & the cinema Bookings & port types and interface relations BookTickets\\
+\hline
+B!{Bookings} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+\hline
+CA\_Adapter & component & the CustomerAccount database adapter & CSD RegisterCustomer\\
+\hline
+CA\_AdapterPort & port & the port connecting the CustomerAccount SQL database to its adapter & CSD / port types and interface relations RegisterCustomer\\
+\hline
+CAPort & port & the port via which the CustomerAccount database may be read and manipulated & CSD / internal interfaces / port types and interface relations RegisterCustomer\\
+\hline
+CAPort\_I & port & the port via which the machine reads and manipulates the CustomerAccount database & CSD / internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
+\hline
+customerAccounts & phenomenon & the customer accounts & internal interfaces / port types and interface relations RegisterCustomer\\
+\hline
+CA!{customerAccounts} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
+\hline
+currentDateTime & phenomenon & returns the milliseconds elapsed since the unix epoch & internal interfaces / port types and interface relations BookTickets / ArchiveShowings; app\_if\\
+\hline
+currentTimeMillis & phenomenon & returns the milliseconds elapsed since the unix epoch & internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
+\hline
+CustomerGUI & component & the Customer's gui component & CSD BookTickets\\
+\hline
+CustomerPort & port & the port to which the servlet container sends requests & CSD / port types and interface relations BookTickets\\
+\hline
+CustomerReqs & provided interface & an interface to send Customer requests to & CSD / internal interfaces / port types and interface relations BookTickets; app\_if\\
+\hline
+CustomerReqsPort & port & the machine port to which Customer requests are sent & CSD / internal interfaces / port types and interface relations BookTickets; app\_if\\
+\hline
+CustomerReqsPort\_I & port & the port to which the CustomerGUI sends Customer requests & CSD / port types and interface relations BookTickets\\
+\hline
+checkStarted & phenomenon & archives all Showings which have already started & internal interfaces ArchiveShowings; app\_if\\
 \hline
 \multicolumn{4}{|l|}{\textbf{C}}\\
 \hline
@@ -702,6 +885,12 @@ doPost & technical phenomenon & A procedure called by the \href{https://jakarta.
 \hline
 duration & attribute & the duration of the movie that is to be shown & Class Model\\
 \hline
+doGet & phenomenon & has the servlet handle the HTTP GET request & port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+doPost & phenomenon & has the servlet handle the HTTP POST request & port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+dateTimeSpanFromMinutes & phenomenon & returns the provided minutes converted to milliseconds & internal interfaces BookTickets; app\_if\\
+\hline
 \multicolumn{4}{|l|}{\textbf{E}}\\
 \hline
 \hypertarget{glossary:Email}{Email} & causal domain, connection domain & an e-mail service offering to deliver e-mails & CD\\
@@ -711,6 +900,10 @@ eMailUnused & guard & the e-mail contained in the registration request is not co
 executeQuery & technical phenomenon & A procedure the machine can call to query the contents of a \href{https://www.mysql.com/products/enterprise/techspec.html}{SQL} database. & TCD\\
 \hline
 executeUpdate & technical phenomenon & A procedure the machine can call to manipulate a \href{https://www.mysql.com/products/enterprise/techspec.html}{SQL} database. & TCD\\
+\hline
+executeQuery & phenomenon & executes an SQL query & port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+executeUpdate & phenomenon & executes an SQL update & port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
 \hline
 \multicolumn{4}{|l|}{\textbf{F}}\\
 \hline
@@ -734,6 +927,12 @@ forwardSubmitBooking & method & tries to book the given seat for the given showi
 \hline
 forwardSubmitRegistration & message & a request from the WebpageRegisterCustomer to register a new customer account, containing an e-mail address and a password & SD R\ref{enum:R1}\\
 \hline
+forwardSubmitRegistration & phenomenon & forwards a registration request to the responsible component, returns registrationSuccess or registration Failed depending on whether the registration succeeded or failed & internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
+\hline
+forwardSubmitBooking & phenomenon & forwards a booking request to the responsible component, returns bookingSuccess or booking Failed depending on whether the booking succeeded or failed & internal interfaces / port types and interface relations BookTickets; app\_if\\
+\hline
+forwardNSUBrowse & phenomenon & forwards a browse request to the responsible component, returns all currently available showings & internal interfaces / port types and interface relations NSUBrowse; app\_if\\
+\hline
 \multicolumn{4}{|l|}{\textbf{G}}\\
 \hline
 get\_bookings & message & contains all messages in the Booking database & SD R5\\
@@ -745,6 +944,16 @@ get\_halls & message & returns all halls in the Hall database & SD R5\\
 get\_showings & message & returns all showings in the Showing database & SD R5, 4/8, 7\\
 \hline
 gui & technical phenomenon & The web browser renders a webpage. & TCD\\
+\hline
+getCustomerAccount & phenomenon & returns the CustomerAccount with the given email, if it exists & internal interfaces RegisterCustomer; app\_if\\
+\hline
+getHall & phenomenon & returns the Hall with the given hallNumber, if it exists & internal interfaces BookTickets; app\_if\\
+\hline
+getShowing & phenomenon & returns the Showing with the given ID, if it exists & internal interfaces BookTickets; app\_if\\
+\hline
+getShowings & phenomenon & returns all Showings & internal interfaces Browse / ArchiveShowings; app\_if\\
+\hline
+getBooking & phenomenon & returns the Booking for the given showing and seat, if it exists & internal interfaces BookTickets; app\_if\\
 \hline
 \multicolumn{4}{|l|}{\textbf{H}}\\
 \hline
@@ -764,6 +973,18 @@ halls & class call name & the database of cinema halls & Class Model\\
 \hline
 http & technical phenomenon & The \href{https://datatracker.ietf.org/doc/html/rfc9112}{Hypertext Transfer Protocol}. A client-server protocol for requesting and providing data, like webpages, over the internet. & TCD\\
 \hline
+HallAdapter & component & the Hall database adapter & CSD BookTickets\\
+\hline
+HallAdapterPort & port & the port connecting the Hall SQL database to its adapter & CSD / port types and interface relations BookTickets\\
+\hline
+HallPort & port & the port via which the Hall database may be read & CSD / internal interfaces / port types and interface relations BookTickets\\
+\hline
+HallPort\_I & port & the port via which the machine reads the Hall database & CSD / port types and interface relations BookTickets; app\_if\\
+\hline
+halls & phenomenon & the cinema halls & port types and interface relations BookTickets\\
+\hline
+H!{halls} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+\hline
 \multicolumn{4}{|l|}{\textbf{I}}\\
 \hline
 id & attribute & the unique id of the showing & Class Model\\
@@ -774,9 +995,27 @@ imap & technical phenomenon & \href{https://tools.ietf.org/html/rfc3501}{Interne
 \hline
 isArchived & attribute & indicates whether the showing is archived & Class Model\\
 \hline
+ICustomerAccount & provided interface & an interface via which the CustomerAccount database may be read and manipulated & CSD / internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
+\hline
+IHall & provided interface & an interface via which the Hall database may be read & CSD / internal interfaces / port types and interface relations BookTickets; app\_if\\
+\hline
+IBooking & provided interface & an interface via which the Booking database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets; app\_if\\
+\hline
+IShowing & provided interface & an interface via which the Showing database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets / Browse / ArchiveShowings; app\_if\\
+\hline
+ITime & provided interface & an interface for providing time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings; app\_if\\
+\hline
+ITimed & provided interface & an interface for triggering timed internal actions & CSD / internal interfaces / port types and interface relations ArchiveShowings; app\_if\\
+\hline
 \multicolumn{4}{|l|}{\textbf{J}}\\
 \hline
-&  &  & \\
+jakarta.servlet.http.Servlet & provided interface & provides handling of HTTP requests & CSD / port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+jakarta.servlet.RequestDispatcher & required interface & a interface to which HTTP requests may be forwarded & / port types and interface relations CSD RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+java.sql.Statement & required interface & an interface for executing SQL statements & CSD / port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+java.lang.System & required interface & an interface for executing SQL statements & CSD / port types and interface relations BookTickets / ArchiveShowings\\
 \hline
 \multicolumn{4}{|l|}{\textbf{K}}\\
 \hline
@@ -804,6 +1043,8 @@ minutes & parameter & the minutes to be converted to unix epoch time & Class Mod
 \hline
 \hypertarget{glossary:modifyShowing}{modifyShowing} & phenomenon & \hyperlink{glossary:UDEKino}{the machine} modifies a showing in the \hyperlink{glossary:Showing}{showings database} & CD\\
 \hline
+modifyShowing & phenomenon & modifies a showing & port tyypes and interface relations ArchiveShowings\\
+\hline
 \multicolumn{4}{|l|}{\textbf{N}}\\
 \hline
 \hypertarget{glossary:NonStaffUser}{NonStaffUser} & biddable domain & either of \hyperlink{glossary:Customer}{Customer} or \hyperlink{glossary:User}{User} & PD R\ref{enum:R4} / R\ref{enum:R8}\\
@@ -827,6 +1068,17 @@ nsuShowings() & method & the machine sends a set of available showings to the we
 \hypertarget{glossary:nsuShowShowings}{nsuShowShowings} & phenomenon & \hyperlink{glossary:WebPageNonStaffUserBrowse}{the website} displays a list of upcoming showings to the \hyperlink{glossary:NonStaffUser}{user} & PD R\ref{enum:R4} / R\ref{enum:R8}\\
 \hline
 nsuShowShowings & message & a rendition of available, i.e., non-archived, showings & SD R4/8\\
+\hline
+NonStaffUserGUI & component & the NonStaffUser's gui component & CSD RegisterCustomer\\
+\hline
+NSUPort & port & the port to which the servlet container sends requests & CSD / port types and interface relations RegisterCustomer\\
+\hline
+NSUReqs & provided interface & an interface to send NonStaffUser requests to & CSD / internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
+\hline
+NSUReqsPort & port & the machine port to which NonStaffUser requests are sent & CSD / internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
+\hline
+NSUReqsPort\_I & port & the port to which the NonStaffUserGUI sends NonStaffUser requests & CSD / port types and interface relations RegisterCustomer\\
+\hline
 \hline
 \multicolumn{4}{|l|}{\textbf{O}}\\
 \hline
@@ -875,6 +1127,10 @@ row & parameter & the row of the seat that is to be booked & Class Model\\
 rows & attribute & the number of rows of seats the cinema hall contains & Class Model\\
 \hline
 result & parameter & the set of available showings & Class Model\\
+\hline
+registrationSuccess & phenomenon & informs the webpage that the registration succeded & port types and interface relations RegisterCustomer\\
+\hline
+registrationFailed & phenomenon & informs the webpage that the registration failed & port types and interface relations RegisterCustomer\\
 \hline
 \multicolumn{4}{|l|}{\textbf{S}}\\
 \hline
@@ -933,9 +1189,35 @@ submitRegistration(in email : String, in password : String) & method & the metho
 \hline
 \hypertarget{glossary:submitShowing}{submitShowing} & phenomenon & a \hyperlink{glossary:StaffMember}{staff member} submits a new showing to the machine for entry into the database & CD\\
 \hline
+ShowingAdapter & component & the Showing database adapter & CSD BookTickets / NUSBrowse / ArchiveShowings\\
+\hline
+ShowingAdapterPort & port & the port connecting the Showing SQL database to its adapter & CSD / port types and interface relations BookTickets / NUSBrowse / ArchiveShowings\\
+\hline
+ShowingPort & port & the port via which the Showing database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets / NUSBrowse / ArchiveShowings\\
+\hline
+ShowingPort\_I & port & the port via which the machine reads and manipulates the Showing database & CSD / port types and interface relations BookTickets / NUSBrowse / ArchiveShowings; app\_if\\
+\hline
+showings & phenomenon & the cinema Showings & port types and interface relations BookTickets / NUSBrowse / ArchiveShowings\\
+\hline
+S!{showings} & interface & interface from the problem diagram & port types and interface relations BookTickets / NUSBrowse / ArchiveShowings\\
+\hline
 \multicolumn{4}{|l|}{\textbf{T}}\\
 \hline
-&  &  & \\
+TimeAdapter & component & an adapter providing time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
+\hline
+TimeAdapterPort & port & the port providing system time to the time adapter & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
+\hline
+TimeAdapterPort\_I & port & the port consuming system time & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
+\hline
+TimePort & port & the port providing time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
+\hline
+TimePort\_I & port & the port consuming time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings; app\_if\\
+\hline
+Timer & component & a timer triggering certain actions in certain intervals & CSD ArchiveShowings\\
+\hline
+TimedPort & port & the machine port for triggering timed internal actions & CSD / internal interfaces ArchiveShowings; app\_if\\
+\hline
+TimedPort\_I & port & the port which triggers timed internal actions & CSD / internal interfaces ArchiveShowings\\
 \hline
 \multicolumn{4}{|l|}{\textbf{U}}\\
 \hline
@@ -979,6 +1261,36 @@ User & actor & a user of who wishes to register a new customer account & SD R\re
 \hline
 \hypertarget{glossary:uShowWebsite}{uShowWebsite} & phenomenon & the \hyperlink{glossary:UDEKino}{machine} shows a website to the \hyperlink{glossary:User}{user} & CD\\
 \hline
+UDEK\_Application & component & the application component & CSD RegisterCustomer / BookTickets / NSUBrowse\\
+\hline
+UDEK\_RegisterCustomer & machine & the machine component & CSD RegisterCustomer\\
+\hline
+UDEK\_BooKTickets & machine & the machine component & CSD BookTickets\\
+\hline
+UDEK\_NonStaffUserBrowse & machine & the machine component & CSD NonStaffUserBrowse\\
+\hline
+UserGUI & component & the User's gui component & CSD RegisterCustomer\\
+\hline
+UserPort & port & the port to which the servlet container sends requests & CSD / port types and interface relations RegisterCustomer\\
+\hline
+UserReqs & provided interface & an interface to send user requests to & CSD / internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
+\hline
+UserReqsPort & port & the machine port to which user requests are sent & CSD / internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
+\hline
+UserReqsPort\_I & port & the port to which the UserGUI sends user requests & CSD / port types and interface relations RegisterCustomer\\
+\hline
+UDEK\_RC!\{registrationSuccess, registrationFailed\} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
+\hline
+UDEK\_RC!\{addCustomerAccount\} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
+\hline
+UDEK\_BT!\{bookingSuccess, bookingFailed\} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+\hline
+UDEK\_BT!\{addBooking\} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+\hline
+UDEK\_NSUB!\{nsuShowings\} & interface & interface from the problem diagram & port types and interface relations NSUBrowse\\
+\hline
+UDEK\_AS!\{modifyShowing\} & interface & interface from the problem diagram & port types and interface relations ArchiveShowings\\
+\hline
 \multicolumn{4}{|l|}{\textbf{V}}\\
 \hline
 &  &  & \\
@@ -1008,6 +1320,12 @@ WebpageRegisterCustomer & object & the webpage for registering a new customer ac
 WebpageRegisterCustomer & class & the class of the webpage for customer registration & Class Model\\
 \hline
 webpageRegisterCustomer & class call name & the instance of the registration webpage class whose request is currently being handled & Class Model\\
+\hline
+WPRC!\{forwardSubmitRegistration\} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
+\hline
+WPBT!\{forwardSubmitBooking\} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+\hline
+WPNSUB!\{forwardNSUBrowse\} & interface & interface from the problem diagram & port types and interface relations NSUBrowse\\
 \hline
 \multicolumn{4}{|l|}{\textbf{X}}\\
 \hline

@@ -1,9 +1,9 @@
 \hline
-addCustomerAccount & phenomenon & creates a CustomerAccount with the provided email and password and adds it to the database & internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+addCustomerAccount & phenomenon & creates a CustomerAccount with the provided email and password and adds it to the database & internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
 \hline
-addBooking & phenomenon & creates a Booking for the customer/showing with the provided email/ID for the provided seat and adds it to the database & internal interfaces / port types and interface relations BookTickets; app_if\\
+addBooking & phenomenon & creates a Booking for the customer/showing with the provided email/ID for the provided seat and adds it to the database & internal interfaces / port types and interface relations BookTickets; app\_if\\
 \hline
-archive & phenomenon & sets the showing with the provided ID to archived & internal interfaces ArchiveShowings; app_if\\
+archive & phenomenon & sets the showing with the provided ID to archived & internal interfaces ArchiveShowings; app\_if\\
 
 
 \hline
@@ -13,7 +13,7 @@ BookingAdapterPort & port & the port connecting the Booking SQL database to its 
 \hline
 BookingPort & port & the port via which the Booking database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets\\
 \hline
-BookingPort_I & port & the port via which the machine reads and manipulates the Booking database & CSD / port types and interface relations BookTickets; app_if\\
+BookingPort\_I & port & the port via which the machine reads and manipulates the Booking database & CSD / port types and interface relations BookTickets; app\_if\\
 \hline
 bookings & phenomenon & the cinema Bookings & port types and interface relations BookTickets\\
 \hline
@@ -21,19 +21,19 @@ B!{Bookings} & interface & interface from the problem diagram & port types and i
 
 
 \hline
-CA_Adapter & component & the CustomerAccount database adapter & CSD RegisterCustomer\\
+CA\_Adapter & component & the CustomerAccount database adapter & CSD RegisterCustomer\\
 \hline
-CA_AdapterPort & port & the port connecting the CustomerAccount SQL database to its adapter & CSD / port types and interface relations RegisterCustomer\\
+CA\_AdapterPort & port & the port connecting the CustomerAccount SQL database to its adapter & CSD / port types and interface relations RegisterCustomer\\
 \hline
 CAPort & port & the port via which the CustomerAccount database may be read and manipulated & CSD / internal interfaces / port types and interface relations RegisterCustomer\\
 \hline
-CAPort_I & port & the port via which the machine reads and manipulates the CustomerAccount database & CSD / internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+CAPort\_I & port & the port via which the machine reads and manipulates the CustomerAccount database & CSD / internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
 \hline
 customerAccounts & phenomenon & the customer accounts & internal interfaces / port types and interface relations RegisterCustomer\\
 \hline
 CA!{customerAccounts} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
 \hline
-currentDateTime & phenomenon & returns the milliseconds elapsed since the unix epoch & internal interfaces / port types and interface relations BookTickets / ArchiveShowings; app_if\\
+currentDateTime & phenomenon & returns the milliseconds elapsed since the unix epoch & internal interfaces / port types and interface relations BookTickets / ArchiveShowings; app\_if\\
 \hline
 currentTimeMillis & phenomenon & returns the milliseconds elapsed since the unix epoch & internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
 \hline
@@ -41,13 +41,13 @@ CustomerGUI & component & the Customer's gui component & CSD BookTickets\\
 \hline
 CustomerPort & port & the port to which the servlet container sends requests & CSD / port types and interface relations BookTickets\\
 \hline
-CustomerReqs & provided interface & an interface to send Customer requests to & CSD / internal interfaces / port types and interface relations BookTickets; app_if\\
+CustomerReqs & provided interface & an interface to send Customer requests to & CSD / internal interfaces / port types and interface relations BookTickets; app\_if\\
 \hline
-CustomerReqsPort & port & the machine port to which Customer requests are sent & CSD / internal interfaces / port types and interface relations BookTickets; app_if\\
+CustomerReqsPort & port & the machine port to which Customer requests are sent & CSD / internal interfaces / port types and interface relations BookTickets; app\_if\\
 \hline
-CustomerReqsPort_I & port & the port to which the CustomerGUI sends Customer requests & CSD / port types and interface relations BookTickets\\
+CustomerReqsPort\_I & port & the port to which the CustomerGUI sends Customer requests & CSD / port types and interface relations BookTickets\\
 \hline
-checkStarted & phenomenon & phenomenon & archives all Showings which have already started & internal interfaces ArchiveShowings; app_if\\
+checkStarted & phenomenon & archives all Showings which have already started & internal interfaces ArchiveShowings; app\_if\\
 
 
 \hline
@@ -55,7 +55,7 @@ doGet & phenomenon & has the servlet handle the HTTP GET request & port types an
 \hline
 doPost & phenomenon & has the servlet handle the HTTP POST request & port types and interface relations RegisterCustomer / BookTickets / NSUBrowse\\
 \hline
-dateTimeSpanFromMinutes & phenomenon & returns the provided minutes converted to milliseconds & internal interfaces BookTickets; app_if\\
+dateTimeSpanFromMinutes & phenomenon & returns the provided minutes converted to milliseconds & internal interfaces BookTickets; app\_if\\
 
 
 \hline
@@ -65,23 +65,23 @@ executeUpdate & phenomenon & executes an SQL update & port types and interface r
 
 
 \hline
-forwardSubmitRegistration & phenomenon & forwards a registration request to the responsible component, returns registrationSuccess or registration Failed depending on whether the registration succeeded or failed & internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+forwardSubmitRegistration & phenomenon & forwards a registration request to the responsible component, returns registrationSuccess or registration Failed depending on whether the registration succeeded or failed & internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
 \hline
-forwardSubmitBooking & phenomenon & forwards a booking request to the responsible component, returns bookingSuccess or booking Failed depending on whether the booking succeeded or failed & internal interfaces / port types and interface relations BookTickets; app_if\\
+forwardSubmitBooking & phenomenon & forwards a booking request to the responsible component, returns bookingSuccess or booking Failed depending on whether the booking succeeded or failed & internal interfaces / port types and interface relations BookTickets; app\_if\\
 \hline
-forwardNSUBrowse & phenomenon & forwards a browse request to the responsible component, returns all currently available showings & internal interfaces / port types and interface relations NSUBrowse; app_if\\
+forwardNSUBrowse & phenomenon & forwards a browse request to the responsible component, returns all currently available showings & internal interfaces / port types and interface relations NSUBrowse; app\_if\\
 
 
 \hline
-getCustomerAccount & phenomenon & returns the CustomerAccount with the given email, if it exists & internal interfaces RegisterCustomer; app_if\\
+getCustomerAccount & phenomenon & returns the CustomerAccount with the given email, if it exists & internal interfaces RegisterCustomer; app\_if\\
 \hline
-getHall & phenomenon & returns the Hall with the given hallNumber, if it exists & internal interfaces BookTickets; app_if\\
+getHall & phenomenon & returns the Hall with the given hallNumber, if it exists & internal interfaces BookTickets; app\_if\\
 \hline
-getShowing & phenomenon & returns the Showing with the given ID, if it exists & internal interfaces BookTickets; app_if\\
+getShowing & phenomenon & returns the Showing with the given ID, if it exists & internal interfaces BookTickets; app\_if\\
 \hline
-getShowings & phenomenon & returns all Showings & internal interfaces Browse / ArchiveShowings; app_if\\
+getShowings & phenomenon & returns all Showings & internal interfaces Browse / ArchiveShowings; app\_if\\
 \hline
-getBooking & phenomenon & returns the Booking for the given showing and seat, if it exists & internal interfaces BookTickets; app_if\\
+getBooking & phenomenon & returns the Booking for the given showing and seat, if it exists & internal interfaces BookTickets; app\_if\\
 
 
 \hline
@@ -91,7 +91,7 @@ HallAdapterPort & port & the port connecting the Hall SQL database to its adapte
 \hline
 HallPort & port & the port via which the Hall database may be read & CSD / internal interfaces / port types and interface relations BookTickets\\
 \hline
-HallPort_I & port & the port via which the machine reads the Hall database & CSD / port types and interface relations BookTickets; app_if\\
+HallPort\_I & port & the port via which the machine reads the Hall database & CSD / port types and interface relations BookTickets; app\_if\\
 \hline
 halls & phenomenon & the cinema halls & port types and interface relations BookTickets\\
 \hline
@@ -99,21 +99,17 @@ H!{halls} & interface & interface from the problem diagram & port types and inte
 
 
 \hline
-ICustomerAccount & provided interface & an interface via which the CustomerAccount database may be read and manipulated & CSD / internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+ICustomerAccount & provided interface & an interface via which the CustomerAccount database may be read and manipulated & CSD / internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
 \hline
-IHall & provided interface & an interface via which the Hall database may be read & CSD / internal interfaces / port types and interface relations BookTickets; app_if\\
+IHall & provided interface & an interface via which the Hall database may be read & CSD / internal interfaces / port types and interface relations BookTickets; app\_if\\
 \hline
-IBooking & provided interface & an interface via which the Booking database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets; app_if\\
+IBooking & provided interface & an interface via which the Booking database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets; app\_if\\
 \hline
-IShowing & provided interface & an interface via which the Showing database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets / Browse / ArchiveShowings; app_if\\
+IShowing & provided interface & an interface via which the Showing database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets / Browse / ArchiveShowings; app\_if\\
 \hline
-ITime & provided interface & an interface for providing time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings; app_if\\
+ITime & provided interface & an interface for providing time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings; app\_if\\
 \hline
-ITimed & provided interface & an interface for triggering timed internal actions & CSD / internal interfaces / port types and interface relations ArchiveShowings; app_if\\
-
-
-\hline
-modifyShowing & phenomenon & modifies a showing & port tyypes and interface relations ArchiveShowings\\
+ITimed & provided interface & an interface for triggering timed internal actions & CSD / internal interfaces / port types and interface relations ArchiveShowings; app\_if\\
 
 
 \hline
@@ -127,15 +123,19 @@ java.lang.System & required interface & an interface for executing SQL statement
 
 
 \hline
+modifyShowing & phenomenon & modifies a showing & port tyypes and interface relations ArchiveShowings\\
+
+
+\hline
 NonStaffUserGUI & component & the NonStaffUser's gui component & CSD RegisterCustomer\\
 \hline
 NSUPort & port & the port to which the servlet container sends requests & CSD / port types and interface relations RegisterCustomer\\
 \hline
-NSUReqs & provided interface & an interface to send NonStaffUser requests to & CSD / internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+NSUReqs & provided interface & an interface to send NonStaffUser requests to & CSD / internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
 \hline
-NSUReqsPort & port & the machine port to which NonStaffUser requests are sent & CSD / internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+NSUReqsPort & port & the machine port to which NonStaffUser requests are sent & CSD / internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
 \hline
-NSUReqsPort_I & port & the port to which the NonStaffUserGUI sends NonStaffUser requests & CSD / port types and interface relations RegisterCustomer\\
+NSUReqsPort\_I & port & the port to which the NonStaffUserGUI sends NonStaffUser requests & CSD / port types and interface relations RegisterCustomer\\
 \hline
 
 
@@ -152,7 +152,7 @@ ShowingAdapterPort & port & the port connecting the Showing SQL database to its 
 \hline
 ShowingPort & port & the port via which the Showing database may be read and manipulated & CSD / internal interfaces / port types and interface relations BookTickets / NUSBrowse / ArchiveShowings\\
 \hline
-ShowingPort_I & port & the port via which the machine reads and manipulates the Showing database & CSD / port types and interface relations BookTickets / NUSBrowse / ArchiveShowings; app_if\\
+ShowingPort\_I & port & the port via which the machine reads and manipulates the Showing database & CSD / port types and interface relations BookTickets / NUSBrowse / ArchiveShowings; app\_if\\
 \hline
 showings & phenomenon & the cinema Showings & port types and interface relations BookTickets / NUSBrowse / ArchiveShowings\\
 \hline
@@ -164,54 +164,54 @@ TimeAdapter & component & an adapter providing time related utilities & CSD / in
 \hline
 TimeAdapterPort & port & the port providing system time to the time adapter & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
 \hline
-TimeAdapterPort_I & port & the port consuming system time & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
+TimeAdapterPort\_I & port & the port consuming system time & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
 \hline
 TimePort & port & the port providing time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings\\
 \hline
-TimePort_I & port & the port consuming time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings; app_if\\
+TimePort\_I & port & the port consuming time related utilities & CSD / internal interfaces / port types and interface relations BookTickets / ArchiveShowings; app\_if\\
 \hline
 Timer & component & a timer triggering certain actions in certain intervals & CSD ArchiveShowings\\
 \hline
-TimedPort & the machine port for triggering timed internal actions & CSD / internal interfaces ArchiveShowings; app_if\\
+TimedPort & port & the machine port for triggering timed internal actions & CSD / internal interfaces ArchiveShowings; app\_if\\
 \hline
-TimedPort_I & the port which triggers timed internal actions & CSD / internal interfaces ArchiveShowings\\
+TimedPort\_I & port & the port which triggers timed internal actions & CSD / internal interfaces ArchiveShowings\\
 
 
 \hline
-UDEK_Application & component & the application component & CSD RegisterCustomer / BookTickets / NSUBrowse\\
+UDEK\_Application & component & the application component & CSD RegisterCustomer / BookTickets / NSUBrowse\\
 \hline
-UDEK_RegisterCustomer & machine & the machine component & CSD RegisterCustomer\\
+UDEK\_RegisterCustomer & machine & the machine component & CSD RegisterCustomer\\
 \hline
-UDEK_BooKTickets & machine & the machine component & CSD BookTickets\\
+UDEK\_BooKTickets & machine & the machine component & CSD BookTickets\\
 \hline
-UDEK_NonStaffUserBrowse & machine & the machine component & CSD NonStaffUserBrowse\\
+UDEK\_NonStaffUserBrowse & machine & the machine component & CSD NonStaffUserBrowse\\
 \hline
 UserGUI & component & the User's gui component & CSD RegisterCustomer\\
 \hline
 UserPort & port & the port to which the servlet container sends requests & CSD / port types and interface relations RegisterCustomer\\
 \hline
-UserReqs & provided interface & an interface to send user requests to & CSD / internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+UserReqs & provided interface & an interface to send user requests to & CSD / internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
 \hline
-UserReqsPort & port & the machine port to which user requests are sent & CSD / internal interfaces / port types and interface relations RegisterCustomer; app_if\\
+UserReqsPort & port & the machine port to which user requests are sent & CSD / internal interfaces / port types and interface relations RegisterCustomer; app\_if\\
 \hline
-UserReqsPort_I & port & the port to which the UserGUI sends user requests & CSD / port types and interface relations RegisterCustomer\\
+UserReqsPort\_I & port & the port to which the UserGUI sends user requests & CSD / port types and interface relations RegisterCustomer\\
 \hline
-UDEK_RC!{registrationSuccess, registrationFailed} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
+UDEK\_RC!\{registrationSuccess, registrationFailed\} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
 \hline
-UDEK_RC!{addCustomerAccount} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
+UDEK\_RC!\{addCustomerAccount\} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
 \hline
-UDEK_BT!{bookingSuccess, bookingFailed} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+UDEK\_BT!\{bookingSuccess, bookingFailed\} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
 \hline
-UDEK_BT!{addBooking} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+UDEK\_BT!\{addBooking\} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
 \hline
-UDEK_NSUB!{nsuShowings} & interface & interface from the problem diagram & port types and interface relations NSUBrowse\\
+UDEK\_NSUB!\{nsuShowings\} & interface & interface from the problem diagram & port types and interface relations NSUBrowse\\
 \hline
-UDEK_AS!{modifyShowing} & interface & interface from the problem diagram & port types and interface relations ArchiveShowings\\
+UDEK\_AS!\{modifyShowing\} & interface & interface from the problem diagram & port types and interface relations ArchiveShowings\\
 
 
 \hline
-WPRC!{forwardSubmitRegistration} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
+WPRC!\{forwardSubmitRegistration\} & interface & interface from the problem diagram & port types and interface relations RegisterCustomer\\
 \hline
-WPBT!{forwardSubmitBooking} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
+WPBT!\{forwardSubmitBooking\} & interface & interface from the problem diagram & port types and interface relations BookTickets\\
 \hline
-WPNSUB!{forwardNSUBrowse} & interface from the problem diagram & port types and interface relations NSUBrowse\\
+WPNSUB!\{forwardNSUBrowse\} & interface & interface from the problem diagram & port types and interface relations NSUBrowse\\
